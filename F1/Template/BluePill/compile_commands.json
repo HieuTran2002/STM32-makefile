@@ -1,0 +1,78 @@
+[
+  {
+    "arguments": [
+      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "-c",
+      "-mcpu=cortex-m3",
+      "-mthumb",
+      "-DSTM32F103xB",
+      "-ICore/Inc",
+      "-IDrivers/CMSIS/Device/ST/STM32F1xx/Include",
+      "-IDrivers/CMSIS/Include",
+      "-Og",
+      "-Wall",
+      "-fdata-sections",
+      "-ffunction-sections",
+      "-g",
+      "-gdwarf-2",
+      "-Wa,-a,-ad,-alms=build/main.lst",
+      "-o",
+      "build/main.o",
+      "Core/Src/main.c"
+    ],
+    "directory": "/home/theuser/code/embedded/STM/F1/Template/BluePill",
+    "file": "/home/theuser/code/embedded/STM/F1/Template/BluePill/Core/Src/main.c",
+    "output": "/home/theuser/code/embedded/STM/F1/Template/BluePill/build/main.o"
+  },
+  {
+    "arguments": [
+      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "-c",
+      "-mcpu=cortex-m3",
+      "-mthumb",
+      "-DSTM32F103xB",
+      "-ICore/Inc",
+      "-IDrivers/CMSIS/Device/ST/STM32F1xx/Include",
+      "-IDrivers/CMSIS/Include",
+      "-Og",
+      "-Wall",
+      "-fdata-sections",
+      "-ffunction-sections",
+      "-g",
+      "-gdwarf-2",
+      "-Wa,-a,-ad,-alms=build/system_stm32f1xx.lst",
+      "-o",
+      "build/system_stm32f1xx.o",
+      "Core/Src/system_stm32f1xx.c"
+    ],
+    "directory": "/home/theuser/code/embedded/STM/F1/Template/BluePill",
+    "file": "/home/theuser/code/embedded/STM/F1/Template/BluePill/Core/Src/system_stm32f1xx.c",
+    "output": "/home/theuser/code/embedded/STM/F1/Template/BluePill/build/system_stm32f1xx.o"
+  },
+  {
+    "arguments": [
+      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "-x",
+      "assembler-with-cpp",
+      "-c",
+      "-mcpu=cortex-m3",
+      "-mthumb",
+      "-DSTM32F103xB",
+      "-ICore/Inc",
+      "-IDrivers/CMSIS/Device/ST/STM32F1xx/Include",
+      "-IDrivers/CMSIS/Include",
+      "-Og",
+      "-Wall",
+      "-fdata-sections",
+      "-ffunction-sections",
+      "-g",
+      "-gdwarf-2",
+      "-o",
+      "build/startup_stm32f103x6.o",
+      "startup_stm32f103x6.s"
+    ],
+    "directory": "/home/theuser/code/embedded/STM/F1/Template/BluePill",
+    "file": "/home/theuser/code/embedded/STM/F1/Template/BluePill/startup_stm32f103x6.s",
+    "output": "/home/theuser/code/embedded/STM/F1/Template/BluePill/build/startup_stm32f103x6.o"
+  }
+]
