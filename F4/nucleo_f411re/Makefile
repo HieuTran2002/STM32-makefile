@@ -15,8 +15,6 @@ C_SOURCES += 	$(wildcard Drivers/*.c)
 
 # ASM sources
 ASM_SOURCES = Startup/startup_stm32f411retx.s
-
-# ASM sources
 ASMM_SOURCES = 
 
 
@@ -138,15 +136,14 @@ $(BUILD_DIR):
 clean:
 	-rm -fR $(BUILD_DIR)
 
-burn:
-	st-flash --reset --freq=4M write $(BUILD_DIR)/$(TARGET).bin 0x8000000
-
-cab:
-	make clean all burn
-	./figlet/figlet -f ./figlet/Doom.flf Done
-
-ca:
+rebuild:
 	make clean all
+
+flash:
+	st-flash --reset write $(BUILD_DIR)/$(TARGET).bin 0x8000000
+
+burn:
+	make clean all flash
 	./figlet/figlet -f ./figlet/Doom.flf good
 
 erase:

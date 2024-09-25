@@ -18,12 +18,18 @@ int main(void)
 
 
     /* Reset GPIO */
-    GPIOA->MODER = 0;
+    GPIOA->MODER  &= ~(3 << 8);
+
     /* Config PA4 */
     GPIOA->MODER  |= 1 << 8;
 
     while (1) {
-        GPIOA->ODR ^= 1 << 4;
+        if(GPIOA->IDR & (1 << 14)){
+            GPIOA->ODR &= ~(1 << 4);
+        }
+        else{
+            GPIOA->ODR ^= 1 << 4;
+        }
         delay_ms(100);
     }
 }

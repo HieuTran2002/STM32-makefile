@@ -150,5 +150,5 @@ clean:
 -include $(wildcard $(BUILD_DIR)/*.d)
 
 flash: $(BUILD_DIR)/$(TARGET).bin
-	st-flash --reset write $< 0x8000000
+	st-flash --connect-under-reset --reset write $< 0x8000000
 # *** EOF ***
