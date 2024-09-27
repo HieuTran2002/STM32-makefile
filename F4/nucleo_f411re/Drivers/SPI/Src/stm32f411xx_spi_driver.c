@@ -59,7 +59,7 @@ void SPI_SendData(SPI_Type* pSPI, uint8_t* pTxBuffer, uint8_t Len){
         }
         else{
             /* 8 bits */
-            pSPI->DR = *pTxBuffer;
+            *(uint8_t *)&pSPI->DR = *pTxBuffer;
             Len--;
             pTxBuffer++;
         }

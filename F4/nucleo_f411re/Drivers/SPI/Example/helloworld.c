@@ -1,5 +1,6 @@
 #include "stm32f411xx.h"
 #include "stm32f411xx_clock.h"
+#include "stm32f411xx_spi_driver.h"
 #include <stdint.h>
 
 void SPI_Transmit(SPI_Type *pSPIx, uint8_t *pTxBuffer, uint32_t length) {
@@ -96,7 +97,7 @@ int main(void){
 
     while (1){
         GPIOA->ODR |= (1 << 5);
-        SPI_Transmit(SPI2, (uint8_t *)string, 12);
+        SPI_SendData(SPI2, string, sizeof(string) - 1);
         GPIOA->ODR &= ~(1 << 5);
         delay_ms(100);
     }
