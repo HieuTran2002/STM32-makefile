@@ -5,13 +5,17 @@ DEBUG = 1
 # optimization
 OPT = -Og
 
+# GDB config file path
+GDB_CONFIG=../../.gdbinit
+
 # Build path
 BUILD_DIR = build
 
 # C sources
-C_SOURCES = 	spi.c
-C_SOURCES += 	$(wildcard Src/*.c)
-C_SOURCES += 	$(wildcard Drivers/*.c)
+C_SOURCES = 	Drivers/SPI/Example/helloworld.c
+C_SOURCES += 	$(wildcard Core/Src/*.c)
+C_SOURCES += 	$(wildcard Drivers/GPIO/Src/*.c)
+C_SOURCES += 	$(wildcard Drivers/SPI/Src/*.c)
 
 # ASM sources
 ASM_SOURCES = Startup/startup_stm32f411retx.s
@@ -64,7 +68,9 @@ AS_INCLUDES =
 C_INCLUDES =  \
 -ICMSIS/Device/ST/STM32F4xx/Include \
 -ICMSIS/Core/Include \
--IDrivers
+-ICore/Inc \
+-IDrivers/SPI/Inc \
+-IDrivers/GPIO/Inc
 
 
 # compile gcc flags
@@ -150,7 +156,11 @@ erase:
 	st-flash --connect-under-reset erase
 
 gdb:
-	gdb-multiarch -f $(BUILD_DIR)/$(TARGET).elf -ex "source ./gdb-svd/gdb-svd.py" -ex "svd stm32f411.svd" -ex "tar ext :3333"
+	gdb-multiarch -x $(GDB_CONFIG) $(BUILD_DIR)/$(TARGET).elf \
+		-ex "tar ext :3333" \
+		-ex "source svd.py" \
+		-ex "svd stm32f411.svd" \
+		-ex "b main" \
 
 openocd:
 	openocd -f interface/stlink-v2.cfg -f target/stm32f4x.cfg

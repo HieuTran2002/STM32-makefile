@@ -2,8 +2,8 @@
 #include <stdint.h>
 
 
-void SPI_Init(SPI_Handle* pSPI_Handle){
-    uint16_t temp = 0;
+void SPI_Init(SPI_Handle_Type* pSPI_Handle){
+    uint32_t temp = 0;
 
     temp |= pSPI_Handle->SPI_Config.CPHA << 0;
     temp |= pSPI_Handle->SPI_Config.CPOL << 1;
@@ -11,7 +11,13 @@ void SPI_Init(SPI_Handle* pSPI_Handle){
     temp |= pSPI_Handle->SPI_Config.SclkSpeed << 3;    
     temp |= pSPI_Handle->SPI_Config.SSM << 9;
     temp |= pSPI_Handle->SPI_Config.DFF << 11;
+
+    /* SSI */
+    if (pSPI_Handle->SPI_Config.SSM) {
+        temp |= (1 << 8);
+    }
     
+    /* BUS */
     if (pSPI_Handle->SPI_Config.BusConfig == SPI_BUS_CONFIG_FD) {
         temp &=  ~(1 << 15);
     }
@@ -22,6 +28,10 @@ void SPI_Init(SPI_Handle* pSPI_Handle){
         temp &=  ~(1 << 15);
         temp |= 1 << 10;
     }
+
+    temp |= (1 << 6);
+
+    pSPI_Handle->pSPI->CR1 = temp;
 }
 
 /**
@@ -40,18 +50,20 @@ void SPI_SendData(SPI_Type* pSPI, uint8_t* pTxBuffer, uint8_t Len){
         while (!(pSPI->SR & (1 << 1)));
 
         /* Check DFF */
-        if (pSPI->CR1 & (1 << 9)) {
+        if (!(pSPI->CR1 & (1 << 9))) {
             /* 16 bits */
-            pSPI->DR |= *((uint16_t*)pTxBuffer);
+            pSPI->DR = *((uint16_t*)pTxBuffer);
             Len--;
             Len--;
             (uint16_t*)pTxBuffer++;
         }
         else{
             /* 8 bits */
-            pSPI->DR |= *pTxBuffer;
+            pSPI->DR = *pTxBuffer;
             Len--;
             pTxBuffer++;
         }
+
+        while (pSPI->SR & (1 << 7));
     }
 }

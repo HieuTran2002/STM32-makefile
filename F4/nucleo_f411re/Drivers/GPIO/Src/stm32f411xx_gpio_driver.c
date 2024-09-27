@@ -1,4 +1,5 @@
 #include "stm32f411xx_gpio_driver.h"
+#include "stm32f411xx_types.h"
 #include "stm32f411xx.h"
 #include <stdint.h>
 
@@ -16,46 +17,8 @@ uint8_t GPIO_ReadPin(GPIO_Type *pGPIO, uint8_t PinNumber){
 }
 
 
-/**
- * Enable GPIO peripheral clock
- *
- */
-void GPIO_ClockPeriControl(GPIO_Type* pGPIO, uint8_t isEnable){
-    if (isEnable) {
-        if (pGPIO == GPIOA) {
-            RCC->AHB1ENR |= 1;
-        }
-        else if (pGPIO == GPIOB) {
-            RCC->AHB1ENR |= 1 << 1;
-        }
-        else if (pGPIO == GPIOC) {
-            RCC->AHB1ENR |= 1 << 2;
-        }
-        else if (pGPIO == GPIOD) {
-            RCC->AHB1ENR |= 1 << 3;
-        }
-    }
-    else {
-        if (pGPIO == GPIOA) {
-            RCC->AHB1ENR &= ~1U;
-        }
-        else if (pGPIO == GPIOB) {
-            RCC->AHB1ENR &= ~(1 << 1);
-        }
-        else if (pGPIO == GPIOC) {
-            RCC->AHB1ENR &= ~(1 << 2);
-        }
-        else if (pGPIO == GPIOD) {
-            RCC->AHB1ENR &= ~(1 << 3);
-        }
-    }
-}
-
 void GPIO_Init(GPIO_Handle_Type *pGPIO_Handle){
     uint32_t temp = 0;
-
-    /* Enable GPIO peripheral clock */
-    GPIO_ClockPeriControl(pGPIO_Handle->pGPIO, 1);
 
     if(pGPIO_Handle->GPIO_Config.PinMode <= GPIO_MODER_ANALOG){
         /* Interrupt mode */
@@ -80,7 +43,7 @@ void GPIO_Init(GPIO_Handle_Type *pGPIO_Handle){
         pGPIO_Handle->pGPIO->OSPEEDR |= temp;
 
         temp = 0;
-        if (pGPIO_Handle->GPIO_Config.AltFunc == GPIO_MODER_ALTFNC) {
+        if (pGPIO_Handle->GPIO_Config.PinMode == GPIO_MODER_ALTFNC) {
             uint8_t idx1, idx2;
             idx1 = pGPIO_Handle->GPIO_Config.PinNumber / 8;
             idx2 = pGPIO_Handle->GPIO_Config.PinNumber % 8;

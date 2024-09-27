@@ -62,5 +62,4 @@
 #define SPI4_PCLK_EN()                      RCC->APB2ENR |= 1 << 13
 
 
-
 #endif

@@ -49,6 +49,5 @@ uint8_t GPIO_ReadPin(GPIO_Type *pGPIO, uint8_t PinNumber);
 
 void GPIO_Init(GPIO_Handle_Type* pGPIO_Handle);
 void GPIO_Deinit(GPIO_Config_Type* pGPIO_Config);
-void GPIO_ClockPeriControl(GPIO_Type* pGPIO, uint8_t isEnable);
 
 #endif

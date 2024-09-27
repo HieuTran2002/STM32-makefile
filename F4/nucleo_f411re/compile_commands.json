@@ -7,26 +7,26 @@
       "-mthumb",
       "-mfpu=fpv4-sp-d16",
       "-mfloat-abi=hard",
-      "-DSTM32F411xE",
       "-DSTM32_THREAD_SAFE_STRATEGY=2",
-      "-IInc",
       "-ICMSIS/Device/ST/STM32F4xx/Include",
       "-ICMSIS/Core/Include",
-      "-IDrivers",
+      "-ICore/Inc",
+      "-IDrivers/SPI/Inc",
+      "-IDrivers/GPIO/Inc",
       "-Og",
       "-Wall",
       "-fdata-sections",
       "-ffunction-sections",
       "-g",
       "-gdwarf-2",
-      "-Wa,-a,-ad,-alms=build/main.lst",
+      "-Wa,-a,-ad,-alms=build/spi.lst",
       "-o",
-      "build/main.o",
-      "Src/main.c"
+      "build/spi.o",
+      "Core/spi.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM32F4/nucleo_f411re",
-    "file": "/home/theuser/code/embedded/STM32F4/nucleo_f411re/Src/main.c",
-    "output": "/home/theuser/code/embedded/STM32F4/nucleo_f411re/build/main.o"
+    "directory": "/home/theuser/code/embedded/STM/F4/nucleo_f411re",
+    "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Core/spi.c",
+    "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/spi.o"
   },
   {
     "arguments": [
@@ -36,12 +36,12 @@
       "-mthumb",
       "-mfpu=fpv4-sp-d16",
       "-mfloat-abi=hard",
-      "-DSTM32F411xE",
       "-DSTM32_THREAD_SAFE_STRATEGY=2",
-      "-IInc",
       "-ICMSIS/Device/ST/STM32F4xx/Include",
       "-ICMSIS/Core/Include",
-      "-IDrivers",
+      "-ICore/Inc",
+      "-IDrivers/SPI/Inc",
+      "-IDrivers/GPIO/Inc",
       "-Og",
       "-Wall",
       "-fdata-sections",
@@ -51,11 +51,11 @@
       "-Wa,-a,-ad,-alms=build/syscalls.lst",
       "-o",
       "build/syscalls.o",
-      "Src/syscalls.c"
+      "Core/Src/syscalls.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM32F4/nucleo_f411re",
-    "file": "/home/theuser/code/embedded/STM32F4/nucleo_f411re/Src/syscalls.c",
-    "output": "/home/theuser/code/embedded/STM32F4/nucleo_f411re/build/syscalls.o"
+    "directory": "/home/theuser/code/embedded/STM/F4/nucleo_f411re",
+    "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Core/Src/syscalls.c",
+    "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/syscalls.o"
   },
   {
     "arguments": [
@@ -65,12 +65,12 @@
       "-mthumb",
       "-mfpu=fpv4-sp-d16",
       "-mfloat-abi=hard",
-      "-DSTM32F411xE",
       "-DSTM32_THREAD_SAFE_STRATEGY=2",
-      "-IInc",
       "-ICMSIS/Device/ST/STM32F4xx/Include",
       "-ICMSIS/Core/Include",
-      "-IDrivers",
+      "-ICore/Inc",
+      "-IDrivers/SPI/Inc",
+      "-IDrivers/GPIO/Inc",
       "-Og",
       "-Wall",
       "-fdata-sections",
@@ -80,11 +80,11 @@
       "-Wa,-a,-ad,-alms=build/sysmem.lst",
       "-o",
       "build/sysmem.o",
-      "Src/sysmem.c"
+      "Core/Src/sysmem.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM32F4/nucleo_f411re",
-    "file": "/home/theuser/code/embedded/STM32F4/nucleo_f411re/Src/sysmem.c",
-    "output": "/home/theuser/code/embedded/STM32F4/nucleo_f411re/build/sysmem.o"
+    "directory": "/home/theuser/code/embedded/STM/F4/nucleo_f411re",
+    "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Core/Src/sysmem.c",
+    "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/sysmem.o"
   },
   {
     "arguments": [
@@ -94,41 +94,12 @@
       "-mthumb",
       "-mfpu=fpv4-sp-d16",
       "-mfloat-abi=hard",
-      "-DSTM32F411xE",
       "-DSTM32_THREAD_SAFE_STRATEGY=2",
-      "-IInc",
       "-ICMSIS/Device/ST/STM32F4xx/Include",
       "-ICMSIS/Core/Include",
-      "-IDrivers",
-      "-Og",
-      "-Wall",
-      "-fdata-sections",
-      "-ffunction-sections",
-      "-g",
-      "-gdwarf-2",
-      "-Wa,-a,-ad,-alms=build/system_stm32f4xx.lst",
-      "-o",
-      "build/system_stm32f4xx.o",
-      "Src/system_stm32f4xx.c"
-    ],
-    "directory": "/home/theuser/code/embedded/STM32F4/nucleo_f411re",
-    "file": "/home/theuser/code/embedded/STM32F4/nucleo_f411re/Src/system_stm32f4xx.c",
-    "output": "/home/theuser/code/embedded/STM32F4/nucleo_f411re/build/system_stm32f4xx.o"
-  },
-  {
-    "arguments": [
-      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
-      "-c",
-      "-mcpu=cortex-m4",
-      "-mthumb",
-      "-mfpu=fpv4-sp-d16",
-      "-mfloat-abi=hard",
-      "-DSTM32F411xE",
-      "-DSTM32_THREAD_SAFE_STRATEGY=2",
-      "-IInc",
-      "-ICMSIS/Device/ST/STM32F4xx/Include",
-      "-ICMSIS/Core/Include",
-      "-IDrivers",
+      "-ICore/Inc",
+      "-IDrivers/SPI/Inc",
+      "-IDrivers/GPIO/Inc",
       "-Og",
       "-Wall",
       "-fdata-sections",
@@ -138,11 +109,40 @@
       "-Wa,-a,-ad,-alms=build/stm32f411xx_gpio_driver.lst",
       "-o",
       "build/stm32f411xx_gpio_driver.o",
-      "Drivers/stm32f411xx_gpio_driver.c"
+      "Drivers/GPIO/Src/stm32f411xx_gpio_driver.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM32F4/nucleo_f411re",
-    "file": "/home/theuser/code/embedded/STM32F4/nucleo_f411re/Drivers/stm32f411xx_gpio_driver.c",
-    "output": "/home/theuser/code/embedded/STM32F4/nucleo_f411re/build/stm32f411xx_gpio_driver.o"
+    "directory": "/home/theuser/code/embedded/STM/F4/nucleo_f411re",
+    "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Drivers/GPIO/Src/stm32f411xx_gpio_driver.c",
+    "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/stm32f411xx_gpio_driver.o"
+  },
+  {
+    "arguments": [
+      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "-c",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-DSTM32_THREAD_SAFE_STRATEGY=2",
+      "-ICMSIS/Device/ST/STM32F4xx/Include",
+      "-ICMSIS/Core/Include",
+      "-ICore/Inc",
+      "-IDrivers/SPI/Inc",
+      "-IDrivers/GPIO/Inc",
+      "-Og",
+      "-Wall",
+      "-fdata-sections",
+      "-ffunction-sections",
+      "-g",
+      "-gdwarf-2",
+      "-Wa,-a,-ad,-alms=build/stm32f411xx_spi_driver.lst",
+      "-o",
+      "build/stm32f411xx_spi_driver.o",
+      "Drivers/SPI/Src/stm32f411xx_spi_driver.c"
+    ],
+    "directory": "/home/theuser/code/embedded/STM/F4/nucleo_f411re",
+    "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Drivers/SPI/Src/stm32f411xx_spi_driver.c",
+    "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/stm32f411xx_spi_driver.o"
   },
   {
     "arguments": [
@@ -154,12 +154,12 @@
       "-mthumb",
       "-mfpu=fpv4-sp-d16",
       "-mfloat-abi=hard",
-      "-DSTM32F411xE",
       "-DSTM32_THREAD_SAFE_STRATEGY=2",
-      "-IInc",
       "-ICMSIS/Device/ST/STM32F4xx/Include",
       "-ICMSIS/Core/Include",
-      "-IDrivers",
+      "-ICore/Inc",
+      "-IDrivers/SPI/Inc",
+      "-IDrivers/GPIO/Inc",
       "-Og",
       "-Wall",
       "-fdata-sections",
@@ -170,8 +170,8 @@
       "build/startup_stm32f411retx.o",
       "Startup/startup_stm32f411retx.s"
     ],
-    "directory": "/home/theuser/code/embedded/STM32F4/nucleo_f411re",
-    "file": "/home/theuser/code/embedded/STM32F4/nucleo_f411re/Startup/startup_stm32f411retx.s",
-    "output": "/home/theuser/code/embedded/STM32F4/nucleo_f411re/build/startup_stm32f411retx.o"
+    "directory": "/home/theuser/code/embedded/STM/F4/nucleo_f411re",
+    "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Startup/startup_stm32f411retx.s",
+    "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/startup_stm32f411retx.o"
   }
 ]

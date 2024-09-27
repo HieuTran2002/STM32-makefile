@@ -4,8 +4,8 @@
 #include "stm32f411xx_types.h"
 #include <stdint.h>
 
-#define SPI_DEVICE_MODE_MASTER                  0
-#define SPI_DEVICE_MODE_SLAVE                   1
+#define SPI_DEVICE_MODE_MASTER                  1
+#define SPI_DEVICE_MODE_SLAVE                   0
 
 #define SPI_BUS_CONFIG_FD                       1
 #define SPI_BUS_CONFIG_HD                       2
@@ -50,9 +50,9 @@ typedef struct{
 typedef struct{
     SPI_Type* pSPI;
     SPI_Config_Type SPI_Config;
-} SPI_Handle;
+} SPI_Handle_Type;
 
-void SPI_Init(SPI_Handle* pSPI_Handle);
+void SPI_Init(SPI_Handle_Type* pSPI_Handle);
 
 void SPI_SendData(SPI_Type* pSPI, uint8_t* pTxBuffer, uint8_t Len);
 
