@@ -7,6 +7,7 @@ OPT = -Og
 
 # GDB config file path
 GDB_CONFIG=../../.gdbinit
+SVD_FILE=../../svd.py
 
 # Build path
 BUILD_DIR = build
@@ -158,7 +159,7 @@ erase:
 gdb:
 	gdb-multiarch -x $(GDB_CONFIG) $(BUILD_DIR)/$(TARGET).elf \
 		-ex "tar ext :3333" \
-		-ex "source svd.py" \
+		-ex "source $(SVD_FILE)" \
 		-ex "svd stm32f411.svd" \
 		-ex "b main" \
 
