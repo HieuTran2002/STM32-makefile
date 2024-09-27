@@ -1,29 +1,39 @@
 TARGET = theproject
 
 
+# debug build?
 DEBUG = 1
-# optimization
-OPT = -Og
 
 # GDB config file path
 GDB_CONFIG=../../.gdbinit
 SVD_FILE=../../svd.py
 
-# Build path
+# optimization
+OPT = -Og
+
+
 BUILD_DIR = build
 
+######################################
+# source
+######################################
 # C sources
-C_SOURCES = 	Drivers/SPI/Example/helloworld.c
-C_SOURCES += 	$(wildcard Core/Src/*.c)
-C_SOURCES += 	$(wildcard Drivers/GPIO/Src/*.c)
-C_SOURCES += 	$(wildcard Drivers/SPI/Src/*.c)
+C_SOURCES = Drivers/GPIO/Example/blinky.c
+C_SOURCES += $(wildcard Core/Src/*.c)
+C_SOURCES += $(wildcard Drivers/GPIO/*.c)
+C_SOURCES += $(wildcard Drivers/SPI/*.c)
 
 # ASM sources
-ASM_SOURCES = Startup/startup_stm32f411retx.s
+ASM_SOURCES = startup_stm32g031xx.s
+
+
+# ASM sources
 ASMM_SOURCES = 
 
 
+#######################################
 # binaries
+#######################################
 PREFIX = arm-none-eabi-
 # The gcc compiler bin path can be either defined in make command via GCC_PATH variable (> make GCC_PATH=xxx)
 # either it can be added to the PATH environment variable.
@@ -41,15 +51,14 @@ endif
 HEX = $(CP) -O ihex
 BIN = $(CP) -O binary -S
  
-# CFLAGS
 # cpu
-CPU = -mcpu=cortex-m4
+CPU = -mcpu=cortex-m0plus
 
 # fpu
-FPU = -mfpu=fpv4-sp-d16
+# NONE for Cortex-M0/M0+/M3
 
 # float-abi
-FLOAT-ABI = -mfloat-abi=hard
+
 
 # mcu
 MCU = $(CPU) -mthumb $(FPU) $(FLOAT-ABI)
@@ -59,7 +68,7 @@ MCU = $(CPU) -mthumb $(FPU) $(FLOAT-ABI)
 AS_DEFS = 
 
 # C defines
-C_DEFS =  -DSTM32_THREAD_SAFE_STRATEGY=2
+C_DEFS =  -DSTM32G031xx
 
 
 # AS includes
@@ -67,11 +76,11 @@ AS_INCLUDES =
 
 # C includes
 C_INCLUDES =  \
--I../CMSIS/Device/ST/STM32F4xx/Include \
--I../CMSIS/Core/Include \
 -ICore/Inc \
--IDrivers/SPI/Inc \
--IDrivers/GPIO/Inc
+-I../CMSIS/Device/ST/STM32G0xx/Include \
+-I../CMSIS/Include \
+-IDrivers/SPI \
+-IDrivers/GPIO \
 
 
 # compile gcc flags
@@ -92,7 +101,7 @@ CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
 # LDFLAGS
 #######################################
 # link script
-LDSCRIPT = STM32F411RETX_FLASH.ld
+LDSCRIPT = stm32g031x6.ld
 
 # libraries
 LIBS = -lc -lm -lnosys 
@@ -136,32 +145,33 @@ $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
 $(BUILD_DIR):
 	mkdir $@		
 
-  
-# dependencies
 -include $(wildcard $(BUILD_DIR)/*.d)
 
 clean:
-	-rm -fR $(BUILD_DIR)
+	rm -rf $(BUILD_DIR)
 
 rebuild:
 	make clean all
 
-flash:
-	st-flash --reset write $(BUILD_DIR)/$(TARGET).bin 0x8000000
+flash: $(BUILD_DIR)/$(TARGET).bin
+	st-flash --connect-under-reset --reset write $< 0x8000000
 
-burn:
-	make clean all flash
-	./figlet/figlet -f ./figlet/Doom.flf good
+burn: clean all flash
 
 erase:
 	st-flash --connect-under-reset erase
 
-gdb:
+gdb: 
 	gdb-multiarch -x $(GDB_CONFIG) $(BUILD_DIR)/$(TARGET).elf \
 		-ex "tar ext :3333" \
 		-ex "source $(SVD_FILE)" \
-		-ex "svd stm32f411.svd" \
+		-ex "svd stm32g031.svd" \
 		-ex "b main" \
 
 openocd:
-	openocd -f interface/stlink-v2.cfg -f target/stm32f4x.cfg
+	openocd -f interface/stlink-v2.cfg -f target/stm32g0x.cfg
+
+
+.PHONY: all clean flash burn
+
+# *** EOF ***
