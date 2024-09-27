@@ -2,14 +2,15 @@ TARGET = bluepill
 
 # debug build?
 DEBUG = 1
+
+# GDB config file path
+GDB_CONFIG=.gdbinit
+SVD_FILE=svd.py
+
 # optimization
 OPT = -Og
 
 
-#######################################
-# paths
-#######################################
-# Build path
 BUILD_DIR = build
 
 ######################################
@@ -75,8 +76,8 @@ AS_INCLUDES =
 # C includes
 C_INCLUDES =  \
 -ICore/Inc \
--IDrivers/CMSIS/Device/ST/STM32F1xx/Include \
--IDrivers/CMSIS/Include
+-I../../CMSIS/Device/ST/STM32F1xx/Include \
+-I../../CMSIS/Include
 
 
 # compile gcc flags
@@ -141,14 +142,32 @@ $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
 $(BUILD_DIR):
 	mkdir $@		
 
-#######################################
-# clean up
-#######################################
+
 clean:
-	-rm -fR $(BUILD_DIR)
-  
--include $(wildcard $(BUILD_DIR)/*.d)
+	rm -rf $(BUILD_DIR)
+
+rebuild:
+	make clean all
 
 flash: $(BUILD_DIR)/$(TARGET).bin
 	st-flash --connect-under-reset --reset write $< 0x8000000
+
+burn: clean all flash
+
+erase:
+	st-flash --connect-under-reset erase
+
+gdb: 
+	gdb-multiarch -x $(GDB_CONFIG) $(BUILD_DIR)/$(TARGET).elf \
+		-ex "tar ext :3333" \
+		-ex "source $(SVD_FILE)" \
+		-ex "svd stm32f103.svd" \
+		-ex "b main" \
+
+openocd:
+	openocd -f interface/stlink-v2.cfg -f target/stm32f1x.cfg
+
+
+.PHONY: all clean flash burn
+
 # *** EOF ***
