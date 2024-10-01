@@ -2,7 +2,7 @@ TARGET = theproject
 
 # Choosing stlink device
 CHOOSE_STLINK = 1
-ONBOARD_STLINK_SERIAL = 066AFF484872664867231647
+ONBOARD_STLINK_SERIAL = B55B5A1A00000000899EF301
 OPENOCD_STLINK = 
 FLASH_STLINK = 
 
@@ -21,13 +21,13 @@ SVD_FILE=../../svd.py
 BUILD_DIR = build
 
 # C sources
-C_SOURCES = 	Drivers/SPI/Example/spi_interrupt.c	
+C_SOURCES = 	Drivers/GPIO/Example/blinky.c
 C_SOURCES += 	$(wildcard Core/Src/*.c)
 C_SOURCES += 	$(wildcard Drivers/GPIO/Src/*.c)
 C_SOURCES += 	$(wildcard Drivers/SPI/Src/*.c)
 
 # ASM sources
-ASM_SOURCES = Startup/startup_stm32f411retx.s
+ASM_SOURCES = Startup/startup_stm32g431xx.s
 ASMM_SOURCES = 
 
 
@@ -66,7 +66,8 @@ MCU = $(CPU) -mthumb $(FPU) $(FLOAT-ABI)
 AS_DEFS = 
 
 # C defines
-C_DEFS =  -DSTM32_THREAD_SAFE_STRATEGY=2
+C_DEFS =  -DSTM32_THREAD_SAFE_STRATEGY=2 \
+		  -DSTM32G431xx
 
 
 # AS includes
@@ -74,11 +75,12 @@ AS_INCLUDES =
 
 # C includes
 C_INCLUDES =  \
--I../CMSIS/Device/ST/STM32F4xx/Include \
+-I../CMSIS/Device/ST/STM32G4xx/Include \
 -I../CMSIS/Core/Include \
 -ICore/Inc \
 -IDrivers/SPI/Inc \
--IDrivers/GPIO/Inc
+-IDrivers/GPIO/Inc \
+-IDrivers/bsp \
 
 
 # compile gcc flags
@@ -95,7 +97,7 @@ endif
 CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
 	 
 # link script
-LDSCRIPT = STM32F411RETX_FLASH.ld
+LDSCRIPT = STM32G431xx_FLASH.ld
 
 # libraries
 LIBS = -lc -lm -lnosys 
@@ -164,10 +166,10 @@ gdb:
 	gdb-multiarch $(BUILD_DIR)/$(TARGET).elf \
 		-ex "tar ext :3333" \
 		-ex "source $(SVD_FILE)" \
-		-ex "dashboard svd load stm32f411.svd" \
+		-ex "dashboard svd load stm32g431.svd" \
 		-ex "dashboard -layout source svd variables" \
-		-ex "svd stm32f411.svd" \
+		-ex "svd stm32g431.svd" \
 		-ex "b main" \
 
 openocd:
-	openocd -f interface/stlink-v2.cfg $(OPENOCD_STLINK) -f target/stm32f4x.cfg
+	openocd -f interface/stlink-v2.cfg $(OPENOCD_STLINK) -f target/stm32g4x.cfg
