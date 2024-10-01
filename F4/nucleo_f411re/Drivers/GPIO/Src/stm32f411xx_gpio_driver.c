@@ -20,6 +20,8 @@ uint8_t GPIO_ReadPin(GPIO_Type *pGPIO, uint8_t PinNumber){
 void GPIO_Init(GPIO_Handle_Type *pGPIO_Handle){
     uint32_t temp = 0;
 
+    GPIO_Clocl_Control(pGPIO_Handle->pGPIO, 1);
+
     if(pGPIO_Handle->GPIO_Config.PinMode <= GPIO_MODER_ANALOG){
         /* Interrupt mode */
 
@@ -56,4 +58,11 @@ void GPIO_Init(GPIO_Handle_Type *pGPIO_Handle){
         /* Interrupt mode */
 
     }
+}
+
+void GPIO_Clocl_Control(GPIO_Type* pGPIO, uint8_t EnOrDi){
+    if      (pGPIO == GPIOA) { GPIOA_PCLK_EN(); }
+    else if (pGPIO == GPIOB) { GPIOB_PCLK_EN(); }
+    else if (pGPIO == GPIOC) { GPIOC_PCLK_EN(); }
+    else if (pGPIO == GPIOD) { GPIOD_PCLK_EN(); }
 }

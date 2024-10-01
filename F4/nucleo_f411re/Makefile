@@ -1,19 +1,27 @@
 TARGET = theproject
 
+# Choosing stlink device
+CHOOSE_STLINK = 1
+ONBOARD_STLINK_SERIAL = 066AFF484872664867231647
+OPENOCD_STLINK = 
+FLASH_STLINK = 
+
+ifeq ($(CHOOSE_STLINK), 1)
+OPENOCD_STLINK 	= -c "adapter serial $(ONBOARD_STLINK_SERIAL)"
+FLASH_STLINK 	= --serial $(ONBOARD_STLINK_SERIAL) 
+endif
 
 DEBUG = 1
-# optimization
 OPT = -Og
 
 # GDB config file path
-GDB_CONFIG=../../.gdbinit
 SVD_FILE=../../svd.py
 
 # Build path
 BUILD_DIR = build
 
 # C sources
-C_SOURCES = 	Drivers/SPI/Example/helloworld.c
+C_SOURCES = 	Drivers/SPI/Example/interrupt.c	
 C_SOURCES += 	$(wildcard Core/Src/*.c)
 C_SOURCES += 	$(wildcard Drivers/GPIO/Src/*.c)
 C_SOURCES += 	$(wildcard Drivers/SPI/Src/*.c)
@@ -25,8 +33,7 @@ ASMM_SOURCES =
 
 # binaries
 PREFIX = arm-none-eabi-
-# The gcc compiler bin path can be either defined in make command via GCC_PATH variable (> make GCC_PATH=xxx)
-# either it can be added to the PATH environment variable.
+
 ifdef GCC_PATH
 CC = $(GCC_PATH)/$(PREFIX)gcc
 AS = $(GCC_PATH)/$(PREFIX)gcc -x assembler-with-cpp
@@ -86,11 +93,7 @@ endif
 
 # Generate dependency information
 CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
-
-
-#######################################
-# LDFLAGS
-#######################################
+	 
 # link script
 LDSCRIPT = STM32F411RETX_FLASH.ld
 
@@ -103,9 +106,6 @@ LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BU
 all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET).bin
 
 
-#######################################
-# build the application
-#######################################
 # list of objects
 OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(C_SOURCES:.c=.o)))
 vpath %.c $(sort $(dir $(C_SOURCES)))
@@ -137,6 +137,8 @@ $(BUILD_DIR):
 	mkdir $@		
 
   
+.PHONY: clean burn rebuild flash erase openocd
+
 # dependencies
 -include $(wildcard $(BUILD_DIR)/*.d)
 
@@ -145,23 +147,27 @@ clean:
 
 rebuild:
 	make clean all
+	figlet -f Isometric1 Done | lolcat
+
 
 flash:
-	st-flash --reset write $(BUILD_DIR)/$(TARGET).bin 0x8000000
+	st-flash $(FLASH_STLINK) --reset write $(BUILD_DIR)/$(TARGET).bin 0x8000000
+	figlet -f Isometric1 done | lolcat
 
 burn:
 	make clean all flash
-	./figlet/figlet -f ./figlet/Doom.flf good
 
 erase:
-	st-flash --connect-under-reset erase
+	st-flash &(FLASH_STLINK)  --connect-under-reset erase
 
 gdb:
-	gdb-multiarch -x $(GDB_CONFIG) $(BUILD_DIR)/$(TARGET).elf \
+	gdb-multiarch $(BUILD_DIR)/$(TARGET).elf \
 		-ex "tar ext :3333" \
 		-ex "source $(SVD_FILE)" \
+		-ex "dashboard svd load stm32f411.svd" \
+		-ex "dashboard -layout source svd variables" \
 		-ex "svd stm32f411.svd" \
 		-ex "b main" \
 
 openocd:
-	openocd -f interface/stlink-v2.cfg -f target/stm32f4x.cfg
+	openocd -f interface/stlink-v2.cfg $(OPENOCD_STLINK) -f target/stm32f4x.cfg

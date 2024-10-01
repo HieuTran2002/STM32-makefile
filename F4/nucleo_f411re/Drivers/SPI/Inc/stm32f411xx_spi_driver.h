@@ -29,13 +29,48 @@
 #define SPI_CPHA_LOW                            0
 #define SPI_CPHA_HIGH                           1 
 
+/* SPI register */
+#define SPI_CR1_BIDIMODE        15
+#define SPI_CR1_BIDIOE          14
+#define SPI_CR1_CRCEN           13
+#define SPI_CR1_CRCNEXT         12
+#define SPI_CR1_DFF             11
+#define SPI_CR1_RXONLY          10
+#define SPI_CR1_SSM             9
+#define SPI_CR1_SSI             8
+#define SPI_CR1_LSBFIRST        7
+#define SPI_CR1_SPE             6
+#define SPI_CR1_BR              3
+#define SPI_CR1_MSTR            2
+#define SPI_CR1_CPOL            1
+#define SPI_CR1_CPHA            0
+
+#define SPI_CR2_TXEIE           7
+#define SPI_CR2_RXNEIE          6
+#define SPI_CR2_ERRIE           5
+#define SPI_CR2_FRF             4
+#define SPI_CR2_SSOE            2
+#define SPI_CR2_TXDMAEN         1
+#define SPI_CR2_RXDMAEN         0
+
+#define SPI_SR_FRE              8
+#define SPI_SR_BSY              7
+#define SPI_SR_OVR              6
+#define SPI_SR_MODF             5
+#define SPI_SR_CRCERR           4
+#define SPI_SR_UDR              3
+#define SPI_SR_CHSIDE           2
+#define SPI_SR_TXE              1
+#define SPI_SR_RXNE             0
 
 /* SPI2 */
-#define SPI2_PORT                               GPIOB
-#define SPI2_MOSI                               15
-#define SPI2_MISO                               14
-#define SPI2_SCK                                13
-#define SPI2_NSS                                12
+#define SPI2_PORT               GPIOB
+#define SPI2_MOSI               15
+#define SPI2_MISO               14
+#define SPI2_SCK                13
+#define SPI2_NSS                12
+
+/* SPI macros */
 
 typedef struct{
     uint8_t DeviceMode;
@@ -50,11 +85,41 @@ typedef struct{
 typedef struct{
     SPI_Type* pSPI;
     SPI_Config_Type SPI_Config;
+    uint8_t *pTxBuffer;
+    uint8_t *pRxBuffer;
+    uint32_t TxLen;
+    uint32_t RxLen;
+    uint8_t TxState;
+    uint8_t RxState;
 } SPI_Handle_Type;
 
 void SPI_Init(SPI_Handle_Type* pSPI_Handle);
 
 void SPI_SendData(SPI_Type* pSPI, uint8_t* pTxBuffer, uint8_t Len);
+void SPI_RecieveData(SPI_Type* pSPI, uint8_t* pTxBuffer, uint8_t Len);
+
+/* Interrupt mode */
+#define SPI_READY           0
+#define SPI_BUSY_IN_TX      1
+#define SPI_BUSY_IN_RX      2
+
+/* SPI application events */
+#define SPI_EVENT_TX_CMPLT  0
+#define SPI_EVENT_RX_CMPLT  1
+#define SPI_EVENT_OVR_ERR   2
+#define SPI_EVENT_CRC_ERR   3
+
+void SPI_IRQInterruptConfit(uint8_t IRQNumber, uint8_t EnOrDi);
+void SPI_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority);
+void SPI_IRQHandling(SPI_Handle_Type* pSPI_Handle);
+
+uint8_t SPI_SendDataIT(SPI_Handle_Type* pSPI_Handle, uint8_t* pTxBuffer, uint8_t Len);
+uint8_t SPI_RecieveDataIT(SPI_Handle_Type* pSPI_Handle, uint8_t* pTxBuffer, uint8_t Len);
+
+void SPI_CloseTranmission(SPI_Handle_Type* pSPI_Handle);
+void SPI_CloseReception(SPI_Handle_Type* pSPI_Handle);
+
+/* Application callback */
+void __attribute__((weak)) SPI_ApplicationCallback(SPI_Handle_Type* pSPI_Handle, uint8_t AppEv);
 
 #endif
-

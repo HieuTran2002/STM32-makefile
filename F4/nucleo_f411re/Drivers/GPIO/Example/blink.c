@@ -1,5 +1,5 @@
 #include "stm32f411xx.h"
-
+#include "stm32f411xx_clock.h"
 int main(void)
 {
     RCC->AHB1ENR |= 1;
@@ -7,7 +7,7 @@ int main(void)
     
     while (1) {
         GPIOA->ODR ^= 1 << 5;
-        for (int i=0; i<160000; i++);
+        delay_ms(50);
     }
 
     return 0;
