@@ -4,6 +4,8 @@
 #include "stm32g431xx_clock.h"
 #include "bsp.h"
 
+#define BTN_PRESSED !((GPIOC->IDR >> 13) & 1)
+
 void GPIO_Config(void){
     GPIO_Handle_Type GPIO_Handle;
 
@@ -21,7 +23,7 @@ int main(void){
     GPIO_Config();
     while (1) {
         LED_PORT->ODR ^=  1 << LED_PIN;
-        delay_ms(50);
+        delay_ms(100);
     }
     return 1;
 }
