@@ -13,7 +13,7 @@ void Clock_Config(void){
 }
 
 void GPIO_Config(void){
-    RCC->IOPENR |= 0b1;
+    RCC->IOPENR |= 0b111;
 
     GPIO_Handle_Type GPIO_Handle;
 
@@ -101,7 +101,7 @@ void SPI2_Init(void){
 int main(void)
 {
     // Clock_Config();
-    GPIO_Config();
+    // GPIO_Config();
     SPI_Pin_Config();
     SPI2_Init();
 
@@ -109,7 +109,6 @@ int main(void)
 
     while (1) {
         SPI_SendData(SPI2, (uint8_t *)string, sizeof(string) - 1);
-        GPIO_TogglePin(GPIOA, 4);
         delay_ms(100);
     }
 }
