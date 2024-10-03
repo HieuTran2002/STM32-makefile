@@ -82,4 +82,19 @@ typedef struct
   __vo uint32_t CALIB;
 } SysTick_Type;
 
+typedef struct
+{
+  __vo uint32_t CR1;        /*!< I2C Control register 1,            Address offset: 0x00 */
+  __vo uint32_t CR2;        /*!< I2C Control register 2,            Address offset: 0x04 */
+  __vo uint32_t OAR1;       /*!< I2C Own address 1 register,        Address offset: 0x08 */
+  __vo uint32_t OAR2;       /*!< I2C Own address 2 register,        Address offset: 0x0C */
+  __vo uint32_t DR;         /*!< I2C Timing register,               Address offset: 0x10 */
+  __vo uint32_t SR1;        /*!< I2C Timing register,               Address offset: 0x10 */
+  __vo uint32_t SR2;        /*!< I2C Timing register,               Address offset: 0x10 */
+  __vo uint32_t CCR;        /*!< I2C Interrupt and status register, Address offset: 0x18 */
+  __vo uint32_t TRISE;        /*!< I2C Interrupt clear register,      Address offset: 0x1C */
+  __vo uint32_t FLTR;       /*!< I2C PEC register,                  Address offset: 0x20 */
+} I2C_TypeDef;
+
+
 #endif

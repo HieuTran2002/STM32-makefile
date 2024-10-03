@@ -21,10 +21,11 @@ SVD_FILE=../../svd.py
 BUILD_DIR = build
 
 # C sources
-C_SOURCES = 	Drivers/SPI/Example/spi_interrupt.c	
+C_SOURCES = 	Drivers/I2C/Example/helloworld.c	
 C_SOURCES += 	$(wildcard Core/Src/*.c)
 C_SOURCES += 	$(wildcard Drivers/GPIO/Src/*.c)
 C_SOURCES += 	$(wildcard Drivers/SPI/Src/*.c)
+C_SOURCES += 	$(wildcard Drivers/I2C/Src/*.c)
 
 # ASM sources
 ASM_SOURCES = Startup/startup_stm32f411retx.s
@@ -78,8 +79,8 @@ C_INCLUDES =  \
 -I../CMSIS/Core/Include \
 -ICore/Inc \
 -IDrivers/SPI/Inc \
--IDrivers/GPIO/Inc
-
+-IDrivers/GPIO/Inc \
+-IDrivers/I2C/Inc
 
 # compile gcc flags
 ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections

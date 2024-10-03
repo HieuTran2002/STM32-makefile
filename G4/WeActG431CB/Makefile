@@ -21,10 +21,11 @@ SVD_FILE=../../svd.py
 BUILD_DIR = build
 
 # C sources
-C_SOURCES = 	Drivers/GPIO/Example/blinky.c
+C_SOURCES = 	Drivers/I2C/Example/helloworld.c
 C_SOURCES += 	$(wildcard Core/Src/*.c)
 C_SOURCES += 	$(wildcard Drivers/GPIO/Src/*.c)
 C_SOURCES += 	$(wildcard Drivers/SPI/Src/*.c)
+C_SOURCES += 	$(wildcard Drivers/I2C/Src/*.c)
 
 # ASM sources
 ASM_SOURCES = Startup/startup_stm32g431xx.s
@@ -80,6 +81,7 @@ C_INCLUDES =  \
 -ICore/Inc \
 -IDrivers/SPI/Inc \
 -IDrivers/GPIO/Inc \
+-IDrivers/I2C/Inc \
 -IDrivers/bsp \
 
 
