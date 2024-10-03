@@ -2,5 +2,5 @@
 **.cache/
 **Doc/
 **Hardware/
-**/.gdb_history
+**/*/.gdb_history
 .gdb_history
