@@ -5,7 +5,6 @@
 #include "stm32f411xx_types.h"
 #include <stdint.h>
 
-
 #define GPIO_MODER_INPUT                0
 #define GPIO_MODER_OUTPUT               1
 #define GPIO_MODER_ALTFNC               2

@@ -4,10 +4,10 @@
 #include "stm32g431xx.h"
 
 /* GPIO Clock control */
-#define GPIOA_PCLK_EN()          RCC->AHB2ENR |= 1 << 0
-#define GPIOB_PCLK_EN()          RCC->AHB2ENR |= 1 << 1
-#define GPIOC_PCLK_EN()          RCC->AHB2ENR |= 1 << 2
-#define GPIOD_PCLK_EN()          RCC->AHB2ENR |= 1 << 3
+#define GPIOA_PCLK_EN()          (RCC->AHB2ENR |= 1 << 0)
+#define GPIOB_PCLK_EN()          (RCC->AHB2ENR |= 1 << 1)
+#define GPIOC_PCLK_EN()          (RCC->AHB2ENR |= 1 << 2)
+#define GPIOD_PCLK_EN()          (RCC->AHB2ENR |= 1 << 3)
 
 /* Configuration options */
 #define GPIO_MODER_INPUT                0

@@ -94,7 +94,7 @@ typedef struct
   __vo uint32_t CCR;        /*!< I2C Interrupt and status register, Address offset: 0x18 */
   __vo uint32_t TRISE;        /*!< I2C Interrupt clear register,      Address offset: 0x1C */
   __vo uint32_t FLTR;       /*!< I2C PEC register,                  Address offset: 0x20 */
-} I2C_TypeDef;
+} I2C_Type;
 
 
 #endif

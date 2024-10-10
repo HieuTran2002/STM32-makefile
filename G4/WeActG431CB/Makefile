@@ -7,8 +7,8 @@ OPENOCD_STLINK =
 FLASH_STLINK = 
 
 ifeq ($(CHOOSE_STLINK), 1)
-OPENOCD_STLINK 	= -c "adapter serial $(ONBOARD_STLINK_SERIAL)"
-FLASH_STLINK 	= --serial $(ONBOARD_STLINK_SERIAL) 
+	OPENOCD_STLINK 	= -c "adapter serial $(ONBOARD_STLINK_SERIAL)"
+	FLASH_STLINK 	= --serial $(ONBOARD_STLINK_SERIAL) 
 endif
 
 DEBUG = 1
@@ -21,7 +21,7 @@ SVD_FILE=../../svd.py
 BUILD_DIR = build
 
 # C sources
-C_SOURCES = 	Drivers/I2C/Example/helloworld.c
+C_SOURCES = 	Drivers/I2C/Example/slave.c
 C_SOURCES += 	$(wildcard Core/Src/*.c)
 C_SOURCES += 	$(wildcard Drivers/GPIO/Src/*.c)
 C_SOURCES += 	$(wildcard Drivers/SPI/Src/*.c)
@@ -36,15 +36,15 @@ ASMM_SOURCES =
 PREFIX = arm-none-eabi-
 
 ifdef GCC_PATH
-CC = $(GCC_PATH)/$(PREFIX)gcc
-AS = $(GCC_PATH)/$(PREFIX)gcc -x assembler-with-cpp
-CP = $(GCC_PATH)/$(PREFIX)objcopy
-SZ = $(GCC_PATH)/$(PREFIX)size
+	CC = $(GCC_PATH)/$(PREFIX)gcc
+	AS = $(GCC_PATH)/$(PREFIX)gcc -x assembler-with-cpp
+	CP = $(GCC_PATH)/$(PREFIX)objcopy
+	SZ = $(GCC_PATH)/$(PREFIX)size
 else
-CC = $(PREFIX)gcc
-AS = $(PREFIX)gcc -x assembler-with-cpp
-CP = $(PREFIX)objcopy
-SZ = $(PREFIX)size
+	CC = $(PREFIX)gcc
+	AS = $(PREFIX)gcc -x assembler-with-cpp
+	CP = $(PREFIX)objcopy
+	SZ = $(PREFIX)size
 endif
 HEX = $(CP) -O ihex
 BIN = $(CP) -O binary -S
@@ -70,19 +70,18 @@ AS_DEFS =
 C_DEFS =  -DSTM32_THREAD_SAFE_STRATEGY=2 \
 		  -DSTM32G431xx
 
-
 # AS includes
 AS_INCLUDES = 
 
 # C includes
-C_INCLUDES =  \
--I../CMSIS/Device/ST/STM32G4xx/Include \
--I../CMSIS/Core/Include \
--ICore/Inc \
--IDrivers/SPI/Inc \
--IDrivers/GPIO/Inc \
--IDrivers/I2C/Inc \
--IDrivers/bsp \
+C_INCLUDES =  	-I../CMSIS/Device/ST/STM32G4xx/Include \
+				-I../CMSIS/Core/Include \
+				-IDrivers/GPIO/Inc \
+				-IDrivers/SPI/Inc \
+				-IDrivers/I2C/Inc \
+				-IDrivers/bsp \
+				-ICore/Inc \
+				-Isystem \
 
 
 # compile gcc flags
@@ -93,7 +92,6 @@ CFLAGS += $(MCU) $(C_DEFS) $(C_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction
 ifeq ($(DEBUG), 1)
 CFLAGS += -g -gdwarf-2
 endif
-
 
 # Generate dependency information
 CFLAGS += -MMD -MP -MF"$(@:%.o=%.d)"
@@ -108,7 +106,6 @@ LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BU
 
 # default action: build all
 all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET).bin
-
 
 # list of objects
 OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(C_SOURCES:.c=.o)))
@@ -140,7 +137,6 @@ $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
 $(BUILD_DIR):
 	mkdir $@		
 
-  
 .PHONY: clean burn rebuild flash erase openocd
 
 # dependencies
@@ -174,4 +170,4 @@ gdb:
 		-ex "b main" \
 
 openocd:
-	openocd -f interface/stlink-v2.cfg $(OPENOCD_STLINK) -f target/stm32g4x.cfg
+	openocd -f interface/stlink.cfg $(OPENOCD_STLINK) -f target/stm32g4x.cfg

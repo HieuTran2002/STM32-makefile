@@ -27,7 +27,7 @@ BUILD_DIR = build
 
 # C sources
 
-C_SOURCES = 	Drivers/GPIO/Example/testbtn.c
+C_SOURCES = 	Drivers/GPIO/Example/blinky.c
 C_SOURCES +=  	$(wildcard Core/Src/*.c) 
 C_SOURCES +=  	$(wildcard Drivers/SPI/*.c) 
 C_SOURCES +=  	$(wildcard Drivers/GPIO/*.c) 

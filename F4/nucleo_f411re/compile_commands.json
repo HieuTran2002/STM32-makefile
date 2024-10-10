@@ -20,14 +20,44 @@
       "-ffunction-sections",
       "-g",
       "-gdwarf-2",
-      "-Wa,-a,-ad,-alms=build/helloworld.lst",
+      "-Wa,-a,-ad,-alms=build/master.lst",
       "-o",
-      "build/helloworld.o",
-      "Drivers/I2C/Example/helloworld.c"
+      "build/master.o",
+      "Drivers/I2C/Example/master.c"
     ],
     "directory": "/home/theuser/code/embedded/STM/F4/nucleo_f411re",
-    "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Drivers/I2C/Example/helloworld.c",
-    "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/helloworld.o"
+    "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Drivers/I2C/Example/master.c",
+    "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/master.o"
+  },
+  {
+    "arguments": [
+      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "-c",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-DSTM32_THREAD_SAFE_STRATEGY=2",
+      "-I../CMSIS/Device/ST/STM32F4xx/Include",
+      "-I../CMSIS/Core/Include",
+      "-ICore/Inc",
+      "-IDrivers/SPI/Inc",
+      "-IDrivers/GPIO/Inc",
+      "-IDrivers/I2C/Inc",
+      "-Og",
+      "-Wall",
+      "-fdata-sections",
+      "-ffunction-sections",
+      "-g",
+      "-gdwarf-2",
+      "-Wa,-a,-ad,-alms=build/stm32f411xx_clock.lst",
+      "-o",
+      "build/stm32f411xx_clock.o",
+      "Core/Src/stm32f411xx_clock.c"
+    ],
+    "directory": "/home/theuser/code/embedded/STM/F4/nucleo_f411re",
+    "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Core/Src/stm32f411xx_clock.c",
+    "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/stm32f411xx_clock.o"
   },
   {
     "arguments": [
@@ -208,36 +238,6 @@
     "directory": "/home/theuser/code/embedded/STM/F4/nucleo_f411re",
     "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Drivers/I2C/Src/stm32f411xx_i2c_driver.c",
     "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/stm32f411xx_i2c_driver.o"
-  },
-  {
-    "arguments": [
-      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
-      "-c",
-      "-mcpu=cortex-m4",
-      "-mthumb",
-      "-mfpu=fpv4-sp-d16",
-      "-mfloat-abi=hard",
-      "-DSTM32_THREAD_SAFE_STRATEGY=2",
-      "-I../CMSIS/Device/ST/STM32F4xx/Include",
-      "-I../CMSIS/Core/Include",
-      "-ICore/Inc",
-      "-IDrivers/SPI/Inc",
-      "-IDrivers/GPIO/Inc",
-      "-IDrivers/I2C/Inc",
-      "-Og",
-      "-Wall",
-      "-fdata-sections",
-      "-ffunction-sections",
-      "-g",
-      "-gdwarf-2",
-      "-Wa,-a,-ad,-alms=build/stm32f411xx_i2c_drivers.lst",
-      "-o",
-      "build/stm32f411xx_i2c_drivers.o",
-      "Drivers/I2C/Src/stm32f411xx_i2c_drivers.c"
-    ],
-    "directory": "/home/theuser/code/embedded/STM/F4/nucleo_f411re",
-    "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Drivers/I2C/Src/stm32f411xx_i2c_drivers.c",
-    "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/stm32f411xx_i2c_drivers.o"
   },
   {
     "arguments": [

@@ -1,7 +1,8 @@
 #ifndef STM32F411XX_I2C_DRIVERS_H
 #define STM32F411XX_I2C_DRIVERS_H
 
-#include "stm32f411xx.h"
+#include "stm32f411xx_types.h"
+#include <stdint.h>
 
 /* Bit position of I2C register */
 #define I2C_CR1_PE           0  // Peripheral Enable
@@ -65,6 +66,9 @@
 #define I2C_FM_DUTY_2           0
 #define I2C_FM_DUTY_16_9        1
 
+/* I2C status Flag */
+#define SPI_TXE_FLAG            1 << I2C_SR1_TXE
+
 typedef struct {
     uint32_t    I2C_SCLSpeed;
     uint8_t     I2C_Device_Address;
@@ -73,14 +77,17 @@ typedef struct {
 } I2C_Config_Type;
 
 typedef struct {
-    I2C_TypeDef* pI2C;
+    I2C_Type* pI2C;
     I2C_Config_Type I2C_Config;
 } I2C_Handle_Type;
 
+uint8_t I2C_SR_GetFlag(I2C_Type* pI2C, uint32_t Flag);
 void I2C_Init(I2C_Handle_Type* pI2C_Handle);
-void I2C_Clock_Control(I2C_TypeDef* pI2C, uint8_t EnOrDi);
+void I2C_Clock_Control(I2C_Type* pI2C, uint8_t EnOrDi);
 
-void I2C_Sendata(I2C_TypeDef* pI2C, uint8_t* pTxBuffer, uint32_t Len);
-void I2C_RecieveData(I2C_TypeDef* pI2C, uint8_t* pRxBuffer, uint32_t Len);
+void I2C_MasterSendata(I2C_Handle_Type* pI2C_Handle, uint8_t* pTxBuffer, uint32_t Len, uint8_t SlaveAddress);
+void I2C_RecieveData(I2C_Type* pI2C, uint8_t* pRxBuffer, uint32_t Len);
+void I2C_MasterReadData(I2C_Handle_Type* pI2C_Handle, uint8_t* pTxBuffer, uint32_t Len, uint8_t SlaveAddress);
+void I2C_ManageACK(I2C_Type* pI2C, uint8_t EnOrDi);
 
 #endif /* end of include guard: STM32F411XX_I2C_DRIVERS_H */

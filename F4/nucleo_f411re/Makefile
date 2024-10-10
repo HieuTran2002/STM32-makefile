@@ -21,7 +21,7 @@ SVD_FILE=../../svd.py
 BUILD_DIR = build
 
 # C sources
-C_SOURCES = 	Drivers/I2C/Example/helloworld.c	
+C_SOURCES = 	Drivers/I2C/Example/master.c	
 C_SOURCES += 	$(wildcard Core/Src/*.c)
 C_SOURCES += 	$(wildcard Drivers/GPIO/Src/*.c)
 C_SOURCES += 	$(wildcard Drivers/SPI/Src/*.c)

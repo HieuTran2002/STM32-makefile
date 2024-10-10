@@ -3,14 +3,12 @@
 #include "stm32g031_clock.h"
 
 void GPIO_Config(void){
-    RCC->IOPENR |= 0b111;
-
+    RCC->IOPENR |= 0b1;
     GPIOA->MODER |= 1 << 8;
 }
 
 int main(void){
     GPIO_Config();
-
     while (1) {
         GPIOA->ODR ^= 1 << 4;
         delay_ms(100);

@@ -11,12 +11,12 @@ void GPIO_Init(GPIO_Handle_Type* pGPIO_Handle){
         /* Interrupt mode */
 
         temp |= pGPIO_Handle->GPIO_Config.PinMode << (2 * pGPIO_Handle->GPIO_Config.PinNumber);
-        pGPIO_Handle->pGPIO->MODER &= ~(0b11 << (2 * pGPIO_Handle->GPIO_Config.PinNumber));
+        pGPIO_Handle->pGPIO->MODER &= ~(3 << (2 * pGPIO_Handle->GPIO_Config.PinNumber));
         pGPIO_Handle->pGPIO->MODER |= temp;
 
         temp = 0;
         temp |= pGPIO_Handle->GPIO_Config.Pull << (2 * pGPIO_Handle->GPIO_Config.PinNumber);
-        pGPIO_Handle->pGPIO->PUPDR &= ~(0x3 << (2 * pGPIO_Handle->GPIO_Config.PinNumber));
+        pGPIO_Handle->pGPIO->PUPDR &= ~(3 << (2 * pGPIO_Handle->GPIO_Config.PinNumber));
         pGPIO_Handle->pGPIO->PUPDR |= temp;
 
         temp = 0;

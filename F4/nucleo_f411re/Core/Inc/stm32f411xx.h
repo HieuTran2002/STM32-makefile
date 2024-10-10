@@ -21,9 +21,9 @@
 #define SPI2_BASEADDR                       (APB1_BASEADDR + 0x3800U)
 #define SPI3_BASEADDR                       (APB1_BASEADDR + 0x3C00U)
 
-#define I2C1_BASEADDR                       APB1_BASEADDR + 0x5C00
-#define I2C2_BASEADDR                       APB1_BASEADDR + 0x5800
-#define I2C3_BASEADDR                       APB1_BASEADDR + 0x5400
+#define I2C3_BASEADDR                       (APB1_BASEADDR + 0x5C00U)
+#define I2C2_BASEADDR                       (APB1_BASEADDR + 0x5800U)
+#define I2C1_BASEADDR                       (APB1_BASEADDR + 0x5400U)
 
 
 /* -------------------- APB2 -------------------- */
@@ -62,8 +62,8 @@
 
 /* ------------ I2C ------------- */
 #define I2C1                                ((I2C_Type*) I2C1_BASEADDR)
-#define I2C1                                ((I2C_Type*) I2C1_BASEADDR)
-#define I2C1                                ((I2C_Type*) I2C1_BASEADDR)
+#define I2C2                                ((I2C_Type*) I2C2_BASEADDR)
+#define I2C3                                ((I2C_Type*) I2C3_BASEADDR)
 
 #define SPI1_PCLK_EN()                      RCC->APB2ENR |= 1 << 12
 #define SPI2_PCLK_EN()                      RCC->APB1ENR |= 1 << 14
