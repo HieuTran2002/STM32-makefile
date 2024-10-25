@@ -2,11 +2,11 @@
 #include "stm32f411xx.h"
 
 void delay_ms(uint32_t ms) {
-    SysTick->LOAD = (16000000 / 1000) * ms - 1;     // Assuming 16 MHz clock
-    SysTick->VAL = 0;                               // Clear the SysTick counter
-    SysTick->CTRL = 5;                              // Enable SysTick, no interrupt
-    while (!(SysTick->CTRL & (1 << 16)));           // Wait for the COUNTFLAG to be set
-    SysTick->CTRL = 0;                              // Disable SysTick
+    SysTick->LOAD = (16000000 / 1000) * ms - 1;
+    SysTick->VAL = 0;
+    SysTick->CTRL = 5;
+    while (!(SysTick->CTRL & (1 << 16)));
+    SysTick->CTRL = 0;
 }
 
 uint32_t GetSysTick(){
@@ -15,8 +15,8 @@ uint32_t GetSysTick(){
     if      (usedClockSource == 1) { return HSI_FREQ; }
     else if (usedClockSource == 2) { return HSE_FREQ; }
     else if (usedClockSource == 3) {
-        
-        uint32_t PLL_Source = 0; 
+
+        uint32_t PLL_Source = 0;
         if      (((RCC->PLLCFGR >> 22) & 3) == 0)   { PLL_Source = HSI_FREQ; }
         else if (((RCC->PLLCFGR >> 22) & 3) == 1)   { PLL_Source = HSE_FREQ; }
 

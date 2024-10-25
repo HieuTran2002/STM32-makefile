@@ -1,0 +1,56 @@
+[
+  {
+    "arguments": [
+      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "-c",
+      "-mthumb",
+      "-mcpu=cortex-m4",
+      "-std=gnu11",
+      "-Iinc",
+      "-Wall",
+      "-O0",
+      "-o",
+      "build/main.o",
+      "src/main.c"
+    ],
+    "directory": "/home/theuser/code/embedded/STM/G4/G4BareMetal",
+    "file": "/home/theuser/code/embedded/STM/G4/G4BareMetal/src/main.c",
+    "output": "/home/theuser/code/embedded/STM/G4/G4BareMetal/build/main.o"
+  },
+  {
+    "arguments": [
+      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "-c",
+      "-mthumb",
+      "-mcpu=cortex-m4",
+      "-std=gnu11",
+      "-Iinc",
+      "-Wall",
+      "-O0",
+      "-o",
+      "build/syscalls.o",
+      "src/syscalls.c"
+    ],
+    "directory": "/home/theuser/code/embedded/STM/G4/G4BareMetal",
+    "file": "/home/theuser/code/embedded/STM/G4/G4BareMetal/src/syscalls.c",
+    "output": "/home/theuser/code/embedded/STM/G4/G4BareMetal/build/syscalls.o"
+  },
+  {
+    "arguments": [
+      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "-c",
+      "-mthumb",
+      "-mcpu=cortex-m4",
+      "-std=gnu11",
+      "-Iinc",
+      "-Wall",
+      "-O0",
+      "-o",
+      "build/stm32g4_startup.o",
+      "src/stm32g4_startup.c"
+    ],
+    "directory": "/home/theuser/code/embedded/STM/G4/G4BareMetal",
+    "file": "/home/theuser/code/embedded/STM/G4/G4BareMetal/src/stm32g4_startup.c",
+    "output": "/home/theuser/code/embedded/STM/G4/G4BareMetal/build/stm32g4_startup.o"
+  }
+]

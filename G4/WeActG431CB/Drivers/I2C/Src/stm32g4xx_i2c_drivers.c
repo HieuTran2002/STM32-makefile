@@ -76,10 +76,11 @@ void I2C_Init(I2C_Handle_Type* pI2C_Handle){
 }
 
 uint8_t I2C_SR_GetFlag(I2C_TypeDef* pI2C, uint32_t Flag){
-    if ((pI2C->ISR >> Flag) & 1){
-        return 1;
-    }
-    return 0;
+    // if ((pI2C->ISR >> Flag) & 1){
+    //     return 1;
+    // }
+    // return 0;
+    return ((pI2C->ISR >> Flag) & 1) ? 1 : 0;
 }
 
 
@@ -152,6 +153,7 @@ void I2C_SlaveReceiveData(I2C_Handle_Type* pI2C_Handle, uint8_t* pRxBuffer, uint
         pRxBuffer++;
         Len--;
     }
+        while (!I2C_SR_GetFlag(pI2C_Handle->pI2C, I2C_ISR_TC_Pos));
 
     /* Clear stop flag */
     // pI2C_Handle->pI2C->ICR |= (1 << I2C_ICR_STOPCF_Pos);

@@ -66,8 +66,23 @@
 #define I2C_FM_DUTY_2           0
 #define I2C_FM_DUTY_16_9        1
 
+/* Macro for I2C event */
+#define I2C_EVENT_TX_CMPLT         0
+#define I2C_EVENT_RX_CMPLT         1
+#define I2C_EVENT_BTF              2
+#define I2C_ERROR_BERR             8
+#define I2C_ERROR_AF               10
+
+/* IC2 IRQ*/
+#define I2C1_EV_IRQ                 31
+#define I2C1_ER_IRQ                 32
+
 /* I2C status Flag */
-#define SPI_TXE_FLAG            1 << I2C_SR1_TXE
+#define I2C_TXE_FLAG            1 << I2C_SR1_TXE
+
+#define I2C_FREE                0xF
+#define I2C_TX_BUSY             1
+#define I2C_RX_BUSY             2
 
 typedef struct {
     uint32_t    I2C_SCLSpeed;
@@ -76,18 +91,44 @@ typedef struct {
     uint16_t    I2C_FMDutyCycle;
 } I2C_Config_Type;
 
+/**
+ * Struct that help handling I2C
+ *
+ * @param TxRxState uint8_t I2C current state
+ * @param DevAddr   uint8_t Device address
+ * @param Sr        uint8_t Start repeat
+ * @param ...
+ * @return None
+ *
+ */
 typedef struct {
     I2C_Type* pI2C;
     I2C_Config_Type I2C_Config;
+    uint8_t* pTxBuffer;
+    uint8_t* pRxBuffer;
+    uint32_t TxLen;
+    uint32_t RxLen;
+    uint8_t TxRxState;
+    uint8_t DevAddr;
+    uint32_t RxSize;
+    uint8_t Sr;
 } I2C_Handle_Type;
 
-uint8_t I2C_SR_GetFlag(I2C_Type* pI2C, uint32_t Flag);
+
 void I2C_Init(I2C_Handle_Type* pI2C_Handle);
 void I2C_Clock_Control(I2C_Type* pI2C, uint8_t EnOrDi);
-
 void I2C_MasterSendata(I2C_Handle_Type* pI2C_Handle, uint8_t* pTxBuffer, uint32_t Len, uint8_t SlaveAddress);
 void I2C_RecieveData(I2C_Type* pI2C, uint8_t* pRxBuffer, uint32_t Len);
 void I2C_MasterReadData(I2C_Handle_Type* pI2C_Handle, uint8_t* pTxBuffer, uint32_t Len, uint8_t SlaveAddress);
-void I2C_ManageACK(I2C_Type* pI2C, uint8_t EnOrDi);
+
+
+/* I2C interrupt configuration */
+void I2C_IRQInterruptConfig();
+void I2C_IRQPriorityConfig();
+void I2C_EV_IRQHandler(I2C_Handle_Type* pI2C_Handle);
+void I2C_ER_IRQHandler(I2C_Handle_Type* pI2C_Handle);
+uint8_t I2C_MasterReceiveDataIT(I2C_Handle_Type *pI2C_Handle,uint8_t *pRxBuffer, uint32_t Len, uint8_t SlaveAddr,uint8_t Sr);
+
+void I2C_ApplicationEventCallback(I2C_Handle_Type* pI2CHandle, uint8_t AppEvt);
 
 #endif /* end of include guard: STM32F411XX_I2C_DRIVERS_H */

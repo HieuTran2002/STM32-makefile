@@ -61,8 +61,8 @@ void GPIO_Init(GPIO_Handle_Type *pGPIO_Handle){
 }
 
 void GPIO_Clocl_Control(GPIO_Type* pGPIO, uint8_t EnOrDi){
-    if      (pGPIO == GPIOA) { GPIOA_PCLK_EN(); }
-    else if (pGPIO == GPIOB) { GPIOB_PCLK_EN(); }
-    else if (pGPIO == GPIOC) { GPIOC_PCLK_EN(); }
-    else if (pGPIO == GPIOD) { GPIOD_PCLK_EN(); }
+    (pGPIO == GPIOA) ? GPIOA_PCLK_EN() : 0;
+    (pGPIO == GPIOB) ? GPIOB_PCLK_EN() : 0;
+    (pGPIO == GPIOC) ? GPIOC_PCLK_EN() : 0;
+    (pGPIO == GPIOD) ? GPIOD_PCLK_EN() : 0;
 }

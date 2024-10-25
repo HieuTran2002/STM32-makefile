@@ -74,7 +74,8 @@ C_DEFS =  -DSTM32_THREAD_SAFE_STRATEGY=2 \
 AS_INCLUDES = 
 
 # C includes
-C_INCLUDES =  	-I../CMSIS/Device/ST/STM32G4xx/Include \
+C_INCLUDES =  	-I/home/theuser/gcc-arm-none-eabi/arm-none-eabi/include 	\
+				-I../CMSIS/Device/ST/STM32G4xx/Include \
 				-I../CMSIS/Core/Include \
 				-IDrivers/GPIO/Inc \
 				-IDrivers/SPI/Inc \

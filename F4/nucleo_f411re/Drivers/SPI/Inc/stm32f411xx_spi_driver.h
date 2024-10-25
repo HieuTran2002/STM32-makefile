@@ -116,8 +116,8 @@ void SPI_IRQHandling(SPI_Handle_Type* pSPI_Handle);
 uint8_t SPI_SendDataIT(SPI_Handle_Type* pSPI_Handle, uint8_t* pTxBuffer, uint8_t Len);
 uint8_t SPI_RecieveDataIT(SPI_Handle_Type* pSPI_Handle, uint8_t* pTxBuffer, uint8_t Len);
 
-void SPI_CloseTranmission(SPI_Handle_Type* pSPI_Handle);
-void SPI_CloseReception(SPI_Handle_Type* pSPI_Handle);
+uint8_t SPI_CloseTranmission(SPI_Handle_Type* pSPI_Handle);
+uint8_t SPI_CloseReception(SPI_Handle_Type* pSPI_Handle);
 
 /* Application callback */
 void __attribute__((weak)) SPI_ApplicationCallback(SPI_Handle_Type* pSPI_Handle, uint8_t AppEv);

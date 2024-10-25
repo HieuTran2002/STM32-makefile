@@ -1,18 +1,12 @@
-#include "bsp.h"
 #include "stm32g431_gpio_drivers.h"
 #include "stm32g431xx.h"
 #include "stm32g431xx_clock.h"
 #include "stm32g4xx_i2c_drivers.h"
+#include "bsp.h"
 #include <stdint.h>
+#include <string.h>
 
-I2C_Handle_Type I2C2_Handle;
-
-typedef struct {
-    uint8_t* TxBuffer;
-    uint8_t* RxBuffer;
-} I2C_Data;
-
-I2C_Data I2C_data = {0};
+I2C_Handle_Type I2C2_Handle = {0};
 
 
 void GPIO_Config(void){
@@ -64,10 +58,10 @@ void I2C2_Config(void){
 
 void SlaveRead(void){
     I2C_SlaveReceiveData(&I2C2_Handle, (uint8_t *)"Ohiooooo", 5);
-    if      (*(I2C_data.RxBuffer) == 'G') {
+    if      (*(I2C2_Handle.pRxBuffer) == 'G') {
         LED_PORT->ODR |= (1 << LED_PIN);
     }
-    else if (*(I2C_data.RxBuffer) == 'F') {
+    else if (*(I2C2_Handle.pRxBuffer) == 'F') {
         LED_PORT->ODR &= ~(1 << LED_PIN);
     }
 }
@@ -81,8 +75,8 @@ int main(void)
     GPIO_Config();
     I2C2_GPIO_Config();
     I2C2_Config();
-    I2C_data.RxBuffer = &(uint8_t){0};
-    I2C_data.TxBuffer = (uint8_t *)"Ohio..........!";
+    I2C2_Handle.pRxBuffer = &(uint8_t){0};
+    I2C2_Handle.pRxBuffer = (uint8_t *)"Ohio..........!";
 
     I2C2->CR1 |= 1;
 

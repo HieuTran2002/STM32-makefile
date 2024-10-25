@@ -59,7 +59,8 @@ void SPI_SendData(SPI_Type* pSPI, uint8_t* pTxBuffer, uint8_t Len){
         if (pSPI->CR1 & (1 << SPI_CR1_DFF)) {
             /* 16 bits */
             pSPI->DR = *((uint16_t*)pTxBuffer);
-            Len-=2;
+            Len--;
+            Len--;
             pTxBuffer+=2;
         }
         else{
@@ -82,7 +83,8 @@ void SPI_RecieveData(SPI_Type* pSPI, uint8_t* pRxBuffer, uint8_t Len){
         if (pSPI->CR1 & (1 << 11)) {
             /* 16 bits */
             *pRxBuffer = (uint16_t)pSPI->DR;
-            Len-=2;
+            Len--;
+            Len--;
             pRxBuffer+=2;
         }
         else{
@@ -171,28 +173,24 @@ void static SPI_RXNE_IT_Handle(SPI_Handle_Type* pSPI_Handle){
 }
 
 void static SPI_OVR_IT_Handle(SPI_Handle_Type* pSPI_Handle){
-    uint8_t temp;
     if (pSPI_Handle->TxState != SPI_BUSY_IN_TX) {
-        temp = pSPI_Handle->pSPI->DR;
-        temp = pSPI_Handle->pSPI->SR;
+        (void)pSPI_Handle->pSPI->DR;
+        (void)pSPI_Handle->pSPI->SR;
     }
-    (void)temp;
 }
 
-void SPI_CloseTranmission(SPI_Handle_Type* pSPI_Handle){
+uint8_t SPI_CloseTranmission(SPI_Handle_Type* pSPI_Handle){
     pSPI_Handle->pSPI->CR2 &= ~(1 << SPI_CR2_TXEIE);
     pSPI_Handle->pTxBuffer = NULL;
     pSPI_Handle->TxLen = 0;
     pSPI_Handle->TxState = SPI_READY;
+    return 1;
 }
 
-void SPI_CloseReception(SPI_Handle_Type* pSPI_Handle){
+uint8_t SPI_CloseReception(SPI_Handle_Type* pSPI_Handle){
     pSPI_Handle->pSPI->CR2 &= ~(1 << SPI_CR2_RXNEIE);
     pSPI_Handle->pRxBuffer = NULL;
     pSPI_Handle->RxLen = 0;
     pSPI_Handle->RxState = SPI_READY;
-}
-
-void __attribute__((weak)) SPI_ApplicationCallback(SPI_Handle_Type* pSPI_Handle, uint8_t AppEv){
-
+    return 1;
 }

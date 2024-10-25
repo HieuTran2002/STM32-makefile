@@ -6,22 +6,14 @@
 #include "bsp.h"
 #include "string.h"
 
-
 #define BTN2     ((GPIOB->IDR >> 8) & 1)
 #define USER_BTN !((GPIOC->IDR >> 13) & 1)
 
 char greeting[] = "Good morning VietNam\n";
 char goodbye[] = "Fuck VietNam\n";
 
-/* I2C data buffer */
-typedef struct {
-    uint8_t* TxBuffer;
-    uint8_t* RxBuffer;
-} I2C_Data;
-I2C_Data I2C_data = {0};
 
-
-I2C_Handle_Type I2C_Handle;
+I2C_Handle_Type I2C_Handle = {0};
 
 /* 
  * PB6 SCL
@@ -70,34 +62,30 @@ void I2C_Config(void){
 void MasterSend(void){
     if (USER_BTN) {
         GPIOA->ODR |= 1 << 5;
-        I2C1->CR1 |= 1;
         I2C_MasterSendata(&I2C_Handle, (uint8_t *)&greeting, 5, 0x3);
         while (USER_BTN);
     }
     else if (BTN2) {
         GPIOA->ODR |= 1 << 5;
-        I2C1->CR1 |= 1;
         I2C_MasterSendata(&I2C_Handle, (uint8_t *)&goodbye, 5, 0x3);
         while (BTN2);
     }
     GPIOA->ODR &= ~(1 << 5);
 }
 
-
 void MasterReceive(void){
-
-    
     if(USER_BTN){
-        I2C_MasterReadData(&I2C_Handle, I2C_data.RxBuffer, 5, 0x3);
-        if (strcmp((char *)I2C_data.RxBuffer, "ABCDE")) {
-            LED_TOGGLE();
-        }
-        else{
-            LED_OFF();
-        }
+        /* read i2c */
+        I2C_MasterReadData(&I2C_Handle, I2C_Handle.pRxBuffer, 5, 0x3);
+
+        /* Toggle if string is match */
+        strcmp((char *)I2C_Handle.pRxBuffer, "ABCDE") ? LED_TOGGLE() : LED_OFF();
+
+        /* wait til button up */
         while(USER_BTN);
     }
 }
+
 int main(void)
 {
     GPIO_Config();

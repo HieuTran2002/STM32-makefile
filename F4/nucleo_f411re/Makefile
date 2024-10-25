@@ -7,8 +7,8 @@ OPENOCD_STLINK =
 FLASH_STLINK = 
 
 ifeq ($(CHOOSE_STLINK), 1)
-OPENOCD_STLINK 	= -c "adapter serial $(ONBOARD_STLINK_SERIAL)"
-FLASH_STLINK 	= --serial $(ONBOARD_STLINK_SERIAL) 
+	OPENOCD_STLINK 	= -c "adapter serial $(ONBOARD_STLINK_SERIAL)"
+	FLASH_STLINK 	= --serial $(ONBOARD_STLINK_SERIAL) 
 endif
 
 DEBUG = 1
@@ -21,11 +21,13 @@ SVD_FILE=../../svd.py
 BUILD_DIR = build
 
 # C sources
-C_SOURCES = 	Drivers/I2C/Example/master.c	
+C_SOURCES = 	Drivers/I2C/Example/master_interrupt_based.c
 C_SOURCES += 	$(wildcard Core/Src/*.c)
 C_SOURCES += 	$(wildcard Drivers/GPIO/Src/*.c)
 C_SOURCES += 	$(wildcard Drivers/SPI/Src/*.c)
 C_SOURCES += 	$(wildcard Drivers/I2C/Src/*.c)
+C_SOURCES += 	$(wildcard Drivers/UART/*.c)
+C_SOURCES += 	$(wildcard Drivers/CoreM4/*.c)
 
 # ASM sources
 ASM_SOURCES = Startup/startup_stm32f411retx.s
@@ -62,7 +64,6 @@ FLOAT-ABI = -mfloat-abi=hard
 # mcu
 MCU = $(CPU) -mthumb $(FPU) $(FLOAT-ABI)
 
-# macros for gcc
 # AS defines
 AS_DEFS = 
 
@@ -75,12 +76,13 @@ AS_INCLUDES =
 
 # C includes
 C_INCLUDES =  \
--I../CMSIS/Device/ST/STM32F4xx/Include \
--I../CMSIS/Core/Include \
+-I/home/theuser/gcc-arm-none-eabi/arm-none-eabi/include \
 -ICore/Inc \
 -IDrivers/SPI/Inc \
 -IDrivers/GPIO/Inc \
--IDrivers/I2C/Inc
+-IDrivers/I2C/Inc \
+-IDrivers/UART \
+-IDrivers/CoreM4 \
 
 # compile gcc flags
 ASFLAGS = $(MCU) $(AS_DEFS) $(AS_INCLUDES) $(OPT) -Wall -fdata-sections -ffunction-sections
@@ -101,11 +103,12 @@ LDSCRIPT = STM32F411RETX_FLASH.ld
 # libraries
 LIBS = -lc -lm -lnosys 
 LIBDIR = 
-LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--gc-sections
+
+LDFLAGS = $(MCU) -specs=nano.specs -T$(LDSCRIPT) $(LIBDIR) $(LIBS) -Wl,-Map=$(BUILD_DIR)/$(TARGET).map,--cref -Wl,--print-memory-usage
+
 
 # default action: build all
 all: $(BUILD_DIR)/$(TARGET).elf $(BUILD_DIR)/$(TARGET).hex $(BUILD_DIR)/$(TARGET).bin
-
 
 # list of objects
 OBJECTS = $(addprefix $(BUILD_DIR)/,$(notdir $(C_SOURCES:.c=.o)))
@@ -126,7 +129,7 @@ $(BUILD_DIR)/%.o: %.S Makefile | $(BUILD_DIR)
 
 $(BUILD_DIR)/$(TARGET).elf: $(OBJECTS) Makefile
 	$(CC) $(OBJECTS) $(LDFLAGS) -o $@
-	$(SZ) $@
+	# $(SZ) $@
 
 $(BUILD_DIR)/%.hex: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
 	$(HEX) $< $@
@@ -149,7 +152,6 @@ clean:
 rebuild:
 	make clean all
 	figlet -f Isometric1 Done | lolcat
-
 
 flash:
 	st-flash $(FLASH_STLINK) --reset write $(BUILD_DIR)/$(TARGET).bin 0x8000000
