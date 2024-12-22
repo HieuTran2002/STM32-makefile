@@ -1,6 +1,5 @@
 TARGET = theproject
 
-
 # debug build?
 DEBUG = 1
 
@@ -18,7 +17,7 @@ BUILD_DIR = build
 # source
 ######################################
 # C sources
-C_SOURCES = Drivers/SPI/Example/helloworld.c
+C_SOURCES = Drivers/GPIO/Example/blink.c
 C_SOURCES += $(wildcard Core/Src/*.c)
 C_SOURCES += $(wildcard Drivers/GPIO/*.c)
 C_SOURCES += $(wildcard Drivers/SPI/*.c)
@@ -162,7 +161,7 @@ erase:
 	st-flash --connect-under-reset erase
 
 gdb: 
-	gdb-multiarch -x $(GDB_CONFIG) $(BUILD_DIR)/$(TARGET).elf \
+	gdb -x $(GDB_CONFIG) $(BUILD_DIR)/$(TARGET).elf \
 		-ex "tar ext :3333" \
 		-ex "source $(SVD_FILE)" \
 		-ex "svd stm32g031.svd" \
