@@ -71,18 +71,21 @@
 
 #define USART_WORDLEN_8BITS             0
 #define USART_WORDLEN_9BITS             1
+
 #define USART_STOPBITS_1                0
 #define USART_STOPBITS_2                2
-#define USART_PS_EVEN                   0
-#define USART_PS_ODD                    1
+
+#define USART_PS_NONE                   0
+#define USART_PS_EVEN                   1
+#define USART_PS_ODD                    2
 
 #define USART_MODE_ONLY_RX              0
 #define USART_MODE_ONLY_TX              1
 #define USART_MODE_TXRX                 2
 
-#define USART_HW_FLOW_CTRL_CTS          0
-#define USART_HW_FLOW_CTRL_RTS          1
-#define USART_HW_FLOW_CTRL_CTS_RTS      2
+#define USART_HW_FLOW_CTRL_CTS          1
+#define USART_HW_FLOW_CTRL_RTS          2
+#define USART_HW_FLOW_CTRL_CTS_RTS      3
 
 typedef struct {
     uint8_t USART_Mode;
@@ -98,8 +101,10 @@ typedef struct{
     USART_Config_Type USART_Config;
 } USART_Handle_Type;
 
+void USART_Init(USART_Handle_Type *pUSARTHandle);
 void USART_PeriClockControl(USART_TypeDef* pUSART, uint8_t EnOrDi);
 void USART_PeripheralControl(USART_TypeDef* pUSART, uint8_t EnOrDi);
+void USART_SetBaudRate(USART_TypeDef *pUSART, uint32_t BaudRate);
 
 uint8_t USART_GetFlag(USART_TypeDef* pUSART, uint8_t StatusFlagName);
 void USART_ClearFlag(USART_TypeDef* pUSART, uint8_t StatusFlagName);
@@ -107,4 +112,7 @@ void USART_ClearFlag(USART_TypeDef* pUSART, uint8_t StatusFlagName);
 void USART_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnOrDi);
 void USART_IRQPriorityConfig(uint8_t IRQNumber, uint8_t IRQPriority);
 
+void USART_SendData(USART_Handle_Type *pUSARTHandle, uint8_t *pTxBuffer, uint32_t Len);
+
+void USART_ReceiveData(USART_Handle_Type *pUSARTHandle, uint8_t *pRxBuffer, uint32_t Len);
 #endif

@@ -13,6 +13,7 @@
       "-IDrivers/SPI/Inc",
       "-IDrivers/GPIO/Inc",
       "-IDrivers/I2C/Inc",
+      "-IDrivers/UART/",
       "-IDrivers/CoreM4",
       "-Og",
       "-Wall",
@@ -20,14 +21,14 @@
       "-ffunction-sections",
       "-g",
       "-gdwarf-2",
-      "-Wa,-a,-ad,-alms=build/master_interrupt_based.lst",
+      "-Wa,-a,-ad,-alms=build/helloworld.lst",
       "-o",
-      "build/master_interrupt_based.o",
-      "Drivers/I2C/Example/master_interrupt_based.c"
+      "build/helloworld.o",
+      "Drivers/UART/Example/helloworld.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM/F4/nucleo_f411re",
-    "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Drivers/I2C/Example/master_interrupt_based.c",
-    "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/master_interrupt_based.o"
+    "directory": "/media/documents/Code/embedded/STM/F4/nucleo_f411re",
+    "file": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/Drivers/UART/Example/helloworld.c",
+    "output": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/build/helloworld.o"
   },
   {
     "arguments": [
@@ -43,6 +44,7 @@
       "-IDrivers/SPI/Inc",
       "-IDrivers/GPIO/Inc",
       "-IDrivers/I2C/Inc",
+      "-IDrivers/UART/",
       "-IDrivers/CoreM4",
       "-Og",
       "-Wall",
@@ -55,9 +57,9 @@
       "build/stm32f411xx_clock.o",
       "Core/Src/stm32f411xx_clock.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM/F4/nucleo_f411re",
-    "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Core/Src/stm32f411xx_clock.c",
-    "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/stm32f411xx_clock.o"
+    "directory": "/media/documents/Code/embedded/STM/F4/nucleo_f411re",
+    "file": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/Core/Src/stm32f411xx_clock.c",
+    "output": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/build/stm32f411xx_clock.o"
   },
   {
     "arguments": [
@@ -73,6 +75,7 @@
       "-IDrivers/SPI/Inc",
       "-IDrivers/GPIO/Inc",
       "-IDrivers/I2C/Inc",
+      "-IDrivers/UART/",
       "-IDrivers/CoreM4",
       "-Og",
       "-Wall",
@@ -85,9 +88,9 @@
       "build/sysmem.o",
       "Core/Src/sysmem.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM/F4/nucleo_f411re",
-    "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Core/Src/sysmem.c",
-    "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/sysmem.o"
+    "directory": "/media/documents/Code/embedded/STM/F4/nucleo_f411re",
+    "file": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/Core/Src/sysmem.c",
+    "output": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/build/sysmem.o"
   },
   {
     "arguments": [
@@ -103,6 +106,7 @@
       "-IDrivers/SPI/Inc",
       "-IDrivers/GPIO/Inc",
       "-IDrivers/I2C/Inc",
+      "-IDrivers/UART/",
       "-IDrivers/CoreM4",
       "-Og",
       "-Wall",
@@ -115,9 +119,9 @@
       "build/system_stm32f4xx.o",
       "Core/Src/system_stm32f4xx.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM/F4/nucleo_f411re",
-    "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Core/Src/system_stm32f4xx.c",
-    "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/system_stm32f4xx.o"
+    "directory": "/media/documents/Code/embedded/STM/F4/nucleo_f411re",
+    "file": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/Core/Src/system_stm32f4xx.c",
+    "output": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/build/system_stm32f4xx.o"
   },
   {
     "arguments": [
@@ -133,6 +137,7 @@
       "-IDrivers/SPI/Inc",
       "-IDrivers/GPIO/Inc",
       "-IDrivers/I2C/Inc",
+      "-IDrivers/UART/",
       "-IDrivers/CoreM4",
       "-Og",
       "-Wall",
@@ -145,9 +150,9 @@
       "build/stm32f411xx_gpio_driver.o",
       "Drivers/GPIO/Src/stm32f411xx_gpio_driver.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM/F4/nucleo_f411re",
-    "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Drivers/GPIO/Src/stm32f411xx_gpio_driver.c",
-    "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/stm32f411xx_gpio_driver.o"
+    "directory": "/media/documents/Code/embedded/STM/F4/nucleo_f411re",
+    "file": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/Drivers/GPIO/Src/stm32f411xx_gpio_driver.c",
+    "output": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/build/stm32f411xx_gpio_driver.o"
   },
   {
     "arguments": [
@@ -163,6 +168,7 @@
       "-IDrivers/SPI/Inc",
       "-IDrivers/GPIO/Inc",
       "-IDrivers/I2C/Inc",
+      "-IDrivers/UART/",
       "-IDrivers/CoreM4",
       "-Og",
       "-Wall",
@@ -175,9 +181,9 @@
       "build/stm32f411xx_spi_driver.o",
       "Drivers/SPI/Src/stm32f411xx_spi_driver.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM/F4/nucleo_f411re",
-    "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Drivers/SPI/Src/stm32f411xx_spi_driver.c",
-    "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/stm32f411xx_spi_driver.o"
+    "directory": "/media/documents/Code/embedded/STM/F4/nucleo_f411re",
+    "file": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/Drivers/SPI/Src/stm32f411xx_spi_driver.c",
+    "output": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/build/stm32f411xx_spi_driver.o"
   },
   {
     "arguments": [
@@ -193,6 +199,7 @@
       "-IDrivers/SPI/Inc",
       "-IDrivers/GPIO/Inc",
       "-IDrivers/I2C/Inc",
+      "-IDrivers/UART/",
       "-IDrivers/CoreM4",
       "-Og",
       "-Wall",
@@ -205,9 +212,9 @@
       "build/I2C_MasterReceiveDataIT.o",
       "Drivers/I2C/Src/I2C_MasterReceiveDataIT.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM/F4/nucleo_f411re",
-    "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Drivers/I2C/Src/I2C_MasterReceiveDataIT.c",
-    "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/I2C_MasterReceiveDataIT.o"
+    "directory": "/media/documents/Code/embedded/STM/F4/nucleo_f411re",
+    "file": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/Drivers/I2C/Src/I2C_MasterReceiveDataIT.c",
+    "output": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/build/I2C_MasterReceiveDataIT.o"
   },
   {
     "arguments": [
@@ -223,6 +230,7 @@
       "-IDrivers/SPI/Inc",
       "-IDrivers/GPIO/Inc",
       "-IDrivers/I2C/Inc",
+      "-IDrivers/UART/",
       "-IDrivers/CoreM4",
       "-Og",
       "-Wall",
@@ -235,9 +243,9 @@
       "build/I2C_MasterSendDataIT.o",
       "Drivers/I2C/Src/I2C_MasterSendDataIT.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM/F4/nucleo_f411re",
-    "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Drivers/I2C/Src/I2C_MasterSendDataIT.c",
-    "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/I2C_MasterSendDataIT.o"
+    "directory": "/media/documents/Code/embedded/STM/F4/nucleo_f411re",
+    "file": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/Drivers/I2C/Src/I2C_MasterSendDataIT.c",
+    "output": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/build/I2C_MasterSendDataIT.o"
   },
   {
     "arguments": [
@@ -253,6 +261,7 @@
       "-IDrivers/SPI/Inc",
       "-IDrivers/GPIO/Inc",
       "-IDrivers/I2C/Inc",
+      "-IDrivers/UART/",
       "-IDrivers/CoreM4",
       "-Og",
       "-Wall",
@@ -265,9 +274,9 @@
       "build/stm32f411xx_i2c_driver.o",
       "Drivers/I2C/Src/stm32f411xx_i2c_driver.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM/F4/nucleo_f411re",
-    "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Drivers/I2C/Src/stm32f411xx_i2c_driver.c",
-    "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/stm32f411xx_i2c_driver.o"
+    "directory": "/media/documents/Code/embedded/STM/F4/nucleo_f411re",
+    "file": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/Drivers/I2C/Src/stm32f411xx_i2c_driver.c",
+    "output": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/build/stm32f411xx_i2c_driver.o"
   },
   {
     "arguments": [
@@ -283,6 +292,38 @@
       "-IDrivers/SPI/Inc",
       "-IDrivers/GPIO/Inc",
       "-IDrivers/I2C/Inc",
+      "-IDrivers/UART/",
+      "-IDrivers/CoreM4",
+      "-Og",
+      "-Wall",
+      "-fdata-sections",
+      "-ffunction-sections",
+      "-g",
+      "-gdwarf-2",
+      "-Wa,-a,-ad,-alms=build/stm32f4xx_uart_driver.lst",
+      "-o",
+      "build/stm32f4xx_uart_driver.o",
+      "Drivers/UART/stm32f4xx_uart_driver.c"
+    ],
+    "directory": "/media/documents/Code/embedded/STM/F4/nucleo_f411re",
+    "file": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/Drivers/UART/stm32f4xx_uart_driver.c",
+    "output": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/build/stm32f4xx_uart_driver.o"
+  },
+  {
+    "arguments": [
+      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "-c",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-DSTM32_THREAD_SAFE_STRATEGY=2",
+      "-I/home/theuser/gcc-arm-none-eabi/arm-none-eabi/include",
+      "-ICore/Inc",
+      "-IDrivers/SPI/Inc",
+      "-IDrivers/GPIO/Inc",
+      "-IDrivers/I2C/Inc",
+      "-IDrivers/UART/",
       "-IDrivers/CoreM4",
       "-Og",
       "-Wall",
@@ -295,9 +336,9 @@
       "build/core.o",
       "Drivers/CoreM4/core.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM/F4/nucleo_f411re",
-    "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Drivers/CoreM4/core.c",
-    "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/core.o"
+    "directory": "/media/documents/Code/embedded/STM/F4/nucleo_f411re",
+    "file": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/Drivers/CoreM4/core.c",
+    "output": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/build/core.o"
   },
   {
     "arguments": [
@@ -315,6 +356,7 @@
       "-IDrivers/SPI/Inc",
       "-IDrivers/GPIO/Inc",
       "-IDrivers/I2C/Inc",
+      "-IDrivers/UART/",
       "-IDrivers/CoreM4",
       "-Og",
       "-Wall",
@@ -326,8 +368,8 @@
       "build/startup_stm32f411retx.o",
       "Startup/startup_stm32f411retx.s"
     ],
-    "directory": "/home/theuser/code/embedded/STM/F4/nucleo_f411re",
-    "file": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/Startup/startup_stm32f411retx.s",
-    "output": "/home/theuser/code/embedded/STM/F4/nucleo_f411re/build/startup_stm32f411retx.o"
+    "directory": "/media/documents/Code/embedded/STM/F4/nucleo_f411re",
+    "file": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/Startup/startup_stm32f411retx.s",
+    "output": "/media/documents/Code/embedded/STM/F4/nucleo_f411re/build/startup_stm32f411retx.o"
   }
 ]

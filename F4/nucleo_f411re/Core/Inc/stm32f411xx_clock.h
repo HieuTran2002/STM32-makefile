@@ -9,5 +9,7 @@
 void delay_ms(uint32_t ms);
 
 uint32_t GetSysTick();
-
+uint32_t GetAHB_Clock();
+uint32_t GetAPB1_Clock();
+uint32_t GetAPB2_Clock();
 #endif

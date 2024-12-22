@@ -2,7 +2,7 @@ TARGET = theproject
 
 # Choosing stlink device
 CHOOSE_STLINK = 1
-ONBOARD_STLINK_SERIAL = B55B5A1A00000000899EF301
+ONBOARD_STLINK_SERIAL = 004200413100000E4E593346
 OPENOCD_STLINK = 
 FLASH_STLINK = 
 
@@ -21,11 +21,12 @@ SVD_FILE=../../svd.py
 BUILD_DIR = build
 
 # C sources
-C_SOURCES = 	Drivers/I2C/Example/slave.c
+C_SOURCES = 	Drivers/USART/Example/helloworld.c
 C_SOURCES += 	$(wildcard Core/Src/*.c)
 C_SOURCES += 	$(wildcard Drivers/GPIO/Src/*.c)
 C_SOURCES += 	$(wildcard Drivers/SPI/Src/*.c)
 C_SOURCES += 	$(wildcard Drivers/I2C/Src/*.c)
+C_SOURCES += 	$(wildcard Drivers/USART/*.c)
 
 # ASM sources
 ASM_SOURCES = Startup/startup_stm32g431xx.s
@@ -80,6 +81,7 @@ C_INCLUDES =  	-I/home/theuser/gcc-arm-none-eabi/arm-none-eabi/include 	\
 				-IDrivers/GPIO/Inc \
 				-IDrivers/SPI/Inc \
 				-IDrivers/I2C/Inc \
+				-IDrivers/USART \
 				-IDrivers/bsp \
 				-ICore/Inc \
 				-Isystem \
@@ -148,12 +150,10 @@ clean:
 
 rebuild:
 	make clean all
-	figlet -f Isometric1 Done | lolcat
 
 
 flash:
 	st-flash $(FLASH_STLINK) --reset write $(BUILD_DIR)/$(TARGET).bin 0x8000000
-	figlet -f Isometric1 done | lolcat
 
 burn:
 	make clean all flash
@@ -162,7 +162,7 @@ erase:
 	st-flash &(FLASH_STLINK)  --connect-under-reset erase
 
 gdb:
-	gdb-multiarch $(BUILD_DIR)/$(TARGET).elf \
+	gdb $(BUILD_DIR)/$(TARGET).elf \
 		-ex "tar ext :3333" \
 		-ex "source $(SVD_FILE)" \
 		-ex "dashboard svd load stm32g431.svd" \

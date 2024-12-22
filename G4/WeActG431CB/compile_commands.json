@@ -15,6 +15,7 @@
       "-IDrivers/GPIO/Inc",
       "-IDrivers/SPI/Inc",
       "-IDrivers/I2C/Inc",
+      "-IDrivers/USART",
       "-IDrivers/bsp",
       "-ICore/Inc",
       "-Isystem",
@@ -24,14 +25,14 @@
       "-ffunction-sections",
       "-g",
       "-gdwarf-2",
-      "-Wa,-a,-ad,-alms=build/slave.lst",
+      "-Wa,-a,-ad,-alms=build/helloworld.lst",
       "-o",
-      "build/slave.o",
-      "Drivers/I2C/Example/slave.c"
+      "build/helloworld.o",
+      "Drivers/USART/Example/helloworld.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM/G4/WeActG431CB",
-    "file": "/home/theuser/code/embedded/STM/G4/WeActG431CB/Drivers/I2C/Example/slave.c",
-    "output": "/home/theuser/code/embedded/STM/G4/WeActG431CB/build/slave.o"
+    "directory": "/media/documents/Code/embedded/STM/G4/WeActG431CB",
+    "file": "/media/documents/Code/embedded/STM/G4/WeActG431CB/Drivers/USART/Example/helloworld.c",
+    "output": "/media/documents/Code/embedded/STM/G4/WeActG431CB/build/helloworld.o"
   },
   {
     "arguments": [
@@ -49,6 +50,7 @@
       "-IDrivers/GPIO/Inc",
       "-IDrivers/SPI/Inc",
       "-IDrivers/I2C/Inc",
+      "-IDrivers/USART",
       "-IDrivers/bsp",
       "-ICore/Inc",
       "-Isystem",
@@ -63,9 +65,9 @@
       "build/stm32g431xx_clock.o",
       "Core/Src/stm32g431xx_clock.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM/G4/WeActG431CB",
-    "file": "/home/theuser/code/embedded/STM/G4/WeActG431CB/Core/Src/stm32g431xx_clock.c",
-    "output": "/home/theuser/code/embedded/STM/G4/WeActG431CB/build/stm32g431xx_clock.o"
+    "directory": "/media/documents/Code/embedded/STM/G4/WeActG431CB",
+    "file": "/media/documents/Code/embedded/STM/G4/WeActG431CB/Core/Src/stm32g431xx_clock.c",
+    "output": "/media/documents/Code/embedded/STM/G4/WeActG431CB/build/stm32g431xx_clock.o"
   },
   {
     "arguments": [
@@ -83,6 +85,7 @@
       "-IDrivers/GPIO/Inc",
       "-IDrivers/SPI/Inc",
       "-IDrivers/I2C/Inc",
+      "-IDrivers/USART",
       "-IDrivers/bsp",
       "-ICore/Inc",
       "-Isystem",
@@ -97,9 +100,9 @@
       "build/system_stm32g4xx.o",
       "Core/Src/system_stm32g4xx.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM/G4/WeActG431CB",
-    "file": "/home/theuser/code/embedded/STM/G4/WeActG431CB/Core/Src/system_stm32g4xx.c",
-    "output": "/home/theuser/code/embedded/STM/G4/WeActG431CB/build/system_stm32g4xx.o"
+    "directory": "/media/documents/Code/embedded/STM/G4/WeActG431CB",
+    "file": "/media/documents/Code/embedded/STM/G4/WeActG431CB/Core/Src/system_stm32g4xx.c",
+    "output": "/media/documents/Code/embedded/STM/G4/WeActG431CB/build/system_stm32g4xx.o"
   },
   {
     "arguments": [
@@ -117,6 +120,7 @@
       "-IDrivers/GPIO/Inc",
       "-IDrivers/SPI/Inc",
       "-IDrivers/I2C/Inc",
+      "-IDrivers/USART",
       "-IDrivers/bsp",
       "-ICore/Inc",
       "-Isystem",
@@ -131,9 +135,9 @@
       "build/stm32g431_gpio_drivers.o",
       "Drivers/GPIO/Src/stm32g431_gpio_drivers.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM/G4/WeActG431CB",
-    "file": "/home/theuser/code/embedded/STM/G4/WeActG431CB/Drivers/GPIO/Src/stm32g431_gpio_drivers.c",
-    "output": "/home/theuser/code/embedded/STM/G4/WeActG431CB/build/stm32g431_gpio_drivers.o"
+    "directory": "/media/documents/Code/embedded/STM/G4/WeActG431CB",
+    "file": "/media/documents/Code/embedded/STM/G4/WeActG431CB/Drivers/GPIO/Src/stm32g431_gpio_drivers.c",
+    "output": "/media/documents/Code/embedded/STM/G4/WeActG431CB/build/stm32g431_gpio_drivers.o"
   },
   {
     "arguments": [
@@ -151,6 +155,7 @@
       "-IDrivers/GPIO/Inc",
       "-IDrivers/SPI/Inc",
       "-IDrivers/I2C/Inc",
+      "-IDrivers/USART",
       "-IDrivers/bsp",
       "-ICore/Inc",
       "-Isystem",
@@ -165,9 +170,44 @@
       "build/stm32g4xx_i2c_drivers.o",
       "Drivers/I2C/Src/stm32g4xx_i2c_drivers.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM/G4/WeActG431CB",
-    "file": "/home/theuser/code/embedded/STM/G4/WeActG431CB/Drivers/I2C/Src/stm32g4xx_i2c_drivers.c",
-    "output": "/home/theuser/code/embedded/STM/G4/WeActG431CB/build/stm32g4xx_i2c_drivers.o"
+    "directory": "/media/documents/Code/embedded/STM/G4/WeActG431CB",
+    "file": "/media/documents/Code/embedded/STM/G4/WeActG431CB/Drivers/I2C/Src/stm32g4xx_i2c_drivers.c",
+    "output": "/media/documents/Code/embedded/STM/G4/WeActG431CB/build/stm32g4xx_i2c_drivers.o"
+  },
+  {
+    "arguments": [
+      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "-c",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-DSTM32_THREAD_SAFE_STRATEGY=2",
+      "-DSTM32G431xx",
+      "-I/home/theuser/gcc-arm-none-eabi/arm-none-eabi/include",
+      "-I../CMSIS/Device/ST/STM32G4xx/Include",
+      "-I../CMSIS/Core/Include",
+      "-IDrivers/GPIO/Inc",
+      "-IDrivers/SPI/Inc",
+      "-IDrivers/I2C/Inc",
+      "-IDrivers/USART",
+      "-IDrivers/bsp",
+      "-ICore/Inc",
+      "-Isystem",
+      "-Og",
+      "-Wall",
+      "-fdata-sections",
+      "-ffunction-sections",
+      "-g",
+      "-gdwarf-2",
+      "-Wa,-a,-ad,-alms=build/stm32g4xx_driver_usart.lst",
+      "-o",
+      "build/stm32g4xx_driver_usart.o",
+      "Drivers/USART/stm32g4xx_driver_usart.c"
+    ],
+    "directory": "/media/documents/Code/embedded/STM/G4/WeActG431CB",
+    "file": "/media/documents/Code/embedded/STM/G4/WeActG431CB/Drivers/USART/stm32g4xx_driver_usart.c",
+    "output": "/media/documents/Code/embedded/STM/G4/WeActG431CB/build/stm32g4xx_driver_usart.o"
   },
   {
     "arguments": [
@@ -187,6 +227,7 @@
       "-IDrivers/GPIO/Inc",
       "-IDrivers/SPI/Inc",
       "-IDrivers/I2C/Inc",
+      "-IDrivers/USART",
       "-IDrivers/bsp",
       "-ICore/Inc",
       "-Isystem",
@@ -200,8 +241,8 @@
       "build/startup_stm32g431xx.o",
       "startup_stm32g431xx.s"
     ],
-    "directory": "/home/theuser/code/embedded/STM/G4/WeActG431CB",
-    "file": "/home/theuser/code/embedded/STM/G4/WeActG431CB/startup_stm32g431xx.s",
-    "output": "/home/theuser/code/embedded/STM/G4/WeActG431CB/build/startup_stm32g431xx.o"
+    "directory": "/media/documents/Code/embedded/STM/G4/WeActG431CB",
+    "file": "/media/documents/Code/embedded/STM/G4/WeActG431CB/startup_stm32g431xx.s",
+    "output": "/media/documents/Code/embedded/STM/G4/WeActG431CB/build/startup_stm32g431xx.o"
   }
 ]

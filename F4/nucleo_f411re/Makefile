@@ -21,7 +21,7 @@ SVD_FILE=../../svd.py
 BUILD_DIR = build
 
 # C sources
-C_SOURCES = 	Drivers/I2C/Example/master_interrupt_based.c
+C_SOURCES = 	./Drivers/UART/Example/helloworld.c
 C_SOURCES += 	$(wildcard Core/Src/*.c)
 C_SOURCES += 	$(wildcard Drivers/GPIO/Src/*.c)
 C_SOURCES += 	$(wildcard Drivers/SPI/Src/*.c)
@@ -81,7 +81,7 @@ C_INCLUDES =  \
 -IDrivers/SPI/Inc \
 -IDrivers/GPIO/Inc \
 -IDrivers/I2C/Inc \
--IDrivers/UART \
+-IDrivers/UART/ \
 -IDrivers/CoreM4 \
 
 # compile gcc flags
@@ -136,6 +136,7 @@ $(BUILD_DIR)/%.hex: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
 	
 $(BUILD_DIR)/%.bin: $(BUILD_DIR)/%.elf | $(BUILD_DIR)
 	$(BIN) $< $@	
+	@figlet  Done
 	
 $(BUILD_DIR):
 	mkdir $@		
@@ -151,11 +152,10 @@ clean:
 
 rebuild:
 	make clean all
-	figlet -f Isometric1 Done | lolcat
 
 flash:
 	st-flash $(FLASH_STLINK) --reset write $(BUILD_DIR)/$(TARGET).bin 0x8000000
-	figlet -f Isometric1 done | lolcat
+	@figlet  done
 
 burn:
 	make clean all flash
@@ -164,13 +164,14 @@ erase:
 	st-flash &(FLASH_STLINK)  --connect-under-reset erase
 
 gdb:
-	gdb-multiarch $(BUILD_DIR)/$(TARGET).elf \
+	gdb $(BUILD_DIR)/$(TARGET).elf \
 		-ex "tar ext :3333" \
 		-ex "source $(SVD_FILE)" \
 		-ex "dashboard svd load stm32f411.svd" \
 		-ex "dashboard -layout source svd variables" \
 		-ex "svd stm32f411.svd" \
 		-ex "b main" \
+		-ex "b USART_SendData" \
 
 openocd:
 	openocd -f interface/stlink-v2.cfg $(OPENOCD_STLINK) -f target/stm32f4x.cfg

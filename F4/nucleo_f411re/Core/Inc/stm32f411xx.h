@@ -25,12 +25,16 @@
 #define I2C2_BASEADDR                       (APB1_BASEADDR + 0x5800U)
 #define I2C1_BASEADDR                       (APB1_BASEADDR + 0x5400U)
 
+#define USART2_BASEADDR                     (APB1_BASEADDR + 0x4400U)
 
 /* -------------------- APB2 -------------------- */
 #define APB2_BASEADDR                       0x40010000U
 
 #define SPI1_BASEADDR                       (APB2_BASEADDR + 0x3000U)
 #define SPI4_BASEADDR                       (APB2_BASEADDR + 0x3400U)
+
+#define USART1_BASEADDR                     (APB2_BASEADDR + 0x1000U)
+#define USART6_BASEADDR                     (APB2_BASEADDR + 0x1400U)
 
 
 /* -------------------- Core -------------------- */
@@ -70,5 +74,8 @@
 #define SPI3_PCLK_EN()                      RCC->APB1ENR |= 1 << 15
 #define SPI4_PCLK_EN()                      RCC->APB2ENR |= 1 << 13
 
-
+/* ------------ USART ------------ */
+#define USART1                              ((USART_TypeDef*) USART1_BASEADDR)
+#define USART2                              ((USART_TypeDef*) USART2_BASEADDR)
+#define USART6                              ((USART_TypeDef*) USART6_BASEADDR)
 #endif

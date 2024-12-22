@@ -1,5 +1,6 @@
 #include "stm32f411xx_clock.h"
 #include "stm32f411xx.h"
+#include <stdint.h>
 
 void delay_ms(uint32_t ms) {
     SysTick->LOAD = (16000000 / 1000) * ms - 1;
@@ -29,3 +30,42 @@ uint32_t GetSysTick(){
     return HSI_FREQ;
 }
 
+uint32_t GetAHB_Clock(){
+    uint32_t SysClock = GetSysTick();
+
+    uint16_t AHB_PreScale[8] = {2, 4, 8, 16, 64, 128, 256, 512};
+
+    return SysClock / AHB_PreScale[(RCC->CFGR >> 4) & 0x7]; 
+}
+
+uint32_t GetAPB1_Clock(){
+    uint32_t SysClock = GetSysTick();
+
+    if (!((RCC->CFGR >> 10) & 0b100)) {
+        return SysClock;
+    }
+
+    uint16_t APB_PreScale[8] = {2, 4, 8, 16};
+
+    uint8_t idx = (RCC->CFGR >> 10) & 0x3;
+
+    idx > 3 ? idx = 3 : 0;
+
+    return SysClock / APB_PreScale[idx]; 
+}
+
+uint32_t GetAPB2_Clock(){
+    uint32_t SysClock = GetSysTick();
+
+    if (!((RCC->CFGR >> 10) & 0b100)) {
+        return SysClock;
+    }
+
+    uint16_t APB_PreScale[8] = {2, 4, 8, 16};
+
+    uint8_t idx = (RCC->CFGR >> 13) & 0x3;
+
+    idx > 3 ? idx = 3 : 0;
+
+    return SysClock / APB_PreScale[idx]; 
+}
