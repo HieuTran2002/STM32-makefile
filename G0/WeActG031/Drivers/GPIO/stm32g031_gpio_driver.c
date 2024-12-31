@@ -1,4 +1,5 @@
 #include "stm32g031_gpio_driver.h"
+#include "stm32g031xx.h"
 #include <stdint.h>
 
 
@@ -14,9 +15,17 @@ uint8_t GPIO_ReadPin(GPIO_TypeDef *pGPIO, uint8_t PinNumber){
     return (uint8_t)((pGPIO->IDR >> PinNumber) & 0x00000001);
 }
 
+void GPIO_ClockPeripheralControl(GPIO_TypeDef* port){
+    port == GPIOA ? RCC->IOPENR |= 0x1 : 0;
+    port == GPIOB ? RCC->IOPENR |= 0x2 : 0;
+    port == GPIOC ? RCC->IOPENR |= 0x4 : 0;
+    port == GPIOD ? RCC->IOPENR |= 0x8 : 0;
+}
 
 void GPIO_Init(GPIO_Handle_Type *pGPIO_Handle){
     uint32_t temp = 0;
+    GPIO_ClockPeripheralControl(pGPIO_Handle->pGPIO);
+
 
     if(pGPIO_Handle->GPIO_Config.PinMode <= GPIO_MODER_ANALOG){
         /* Interrupt mode */

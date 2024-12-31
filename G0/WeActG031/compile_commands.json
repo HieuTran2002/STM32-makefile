@@ -1,7 +1,7 @@
 [
   {
     "arguments": [
-      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "/home/theuser/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
       "-c",
       "-mcpu=cortex-m0plus",
       "-mthumb",
@@ -11,24 +11,25 @@
       "-I../CMSIS/Include",
       "-IDrivers/SPI",
       "-IDrivers/GPIO",
+      "-IDrivers/USART",
       "-Og",
       "-Wall",
       "-fdata-sections",
       "-ffunction-sections",
       "-g",
       "-gdwarf-2",
-      "-Wa,-a,-ad,-alms=build/helloworld.lst",
+      "-Wa,-a,-ad,-alms=build/blink.lst",
       "-o",
-      "build/helloworld.o",
-      "Drivers/SPI/Example/helloworld.c"
+      "build/blink.o",
+      "Drivers/GPIO/Example/blink.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM/G0/WeActG031",
-    "file": "/home/theuser/code/embedded/STM/G0/WeActG031/Drivers/SPI/Example/helloworld.c",
-    "output": "/home/theuser/code/embedded/STM/G0/WeActG031/build/helloworld.o"
+    "directory": "/media/documents/Code/embedded/STM/G0/WeActG031",
+    "file": "/media/documents/Code/embedded/STM/G0/WeActG031/Drivers/GPIO/Example/blink.c",
+    "output": "/media/documents/Code/embedded/STM/G0/WeActG031/build/blink.o"
   },
   {
     "arguments": [
-      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "/home/theuser/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
       "-c",
       "-mcpu=cortex-m0plus",
       "-mthumb",
@@ -38,6 +39,7 @@
       "-I../CMSIS/Include",
       "-IDrivers/SPI",
       "-IDrivers/GPIO",
+      "-IDrivers/USART",
       "-Og",
       "-Wall",
       "-fdata-sections",
@@ -49,13 +51,13 @@
       "build/syscalls.o",
       "Core/Src/syscalls.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM/G0/WeActG031",
-    "file": "/home/theuser/code/embedded/STM/G0/WeActG031/Core/Src/syscalls.c",
-    "output": "/home/theuser/code/embedded/STM/G0/WeActG031/build/syscalls.o"
+    "directory": "/media/documents/Code/embedded/STM/G0/WeActG031",
+    "file": "/media/documents/Code/embedded/STM/G0/WeActG031/Core/Src/syscalls.c",
+    "output": "/media/documents/Code/embedded/STM/G0/WeActG031/build/syscalls.o"
   },
   {
     "arguments": [
-      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "/home/theuser/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
       "-c",
       "-mcpu=cortex-m0plus",
       "-mthumb",
@@ -65,6 +67,7 @@
       "-I../CMSIS/Include",
       "-IDrivers/SPI",
       "-IDrivers/GPIO",
+      "-IDrivers/USART",
       "-Og",
       "-Wall",
       "-fdata-sections",
@@ -76,13 +79,13 @@
       "build/sysmem.o",
       "Core/Src/sysmem.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM/G0/WeActG031",
-    "file": "/home/theuser/code/embedded/STM/G0/WeActG031/Core/Src/sysmem.c",
-    "output": "/home/theuser/code/embedded/STM/G0/WeActG031/build/sysmem.o"
+    "directory": "/media/documents/Code/embedded/STM/G0/WeActG031",
+    "file": "/media/documents/Code/embedded/STM/G0/WeActG031/Core/Src/sysmem.c",
+    "output": "/media/documents/Code/embedded/STM/G0/WeActG031/build/sysmem.o"
   },
   {
     "arguments": [
-      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "/home/theuser/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
       "-c",
       "-mcpu=cortex-m0plus",
       "-mthumb",
@@ -92,6 +95,7 @@
       "-I../CMSIS/Include",
       "-IDrivers/SPI",
       "-IDrivers/GPIO",
+      "-IDrivers/USART",
       "-Og",
       "-Wall",
       "-fdata-sections",
@@ -103,13 +107,13 @@
       "build/system_stm32g0xx.o",
       "Core/Src/system_stm32g0xx.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM/G0/WeActG031",
-    "file": "/home/theuser/code/embedded/STM/G0/WeActG031/Core/Src/system_stm32g0xx.c",
-    "output": "/home/theuser/code/embedded/STM/G0/WeActG031/build/system_stm32g0xx.o"
+    "directory": "/media/documents/Code/embedded/STM/G0/WeActG031",
+    "file": "/media/documents/Code/embedded/STM/G0/WeActG031/Core/Src/system_stm32g0xx.c",
+    "output": "/media/documents/Code/embedded/STM/G0/WeActG031/build/system_stm32g0xx.o"
   },
   {
     "arguments": [
-      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "/home/theuser/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
       "-c",
       "-mcpu=cortex-m0plus",
       "-mthumb",
@@ -119,6 +123,7 @@
       "-I../CMSIS/Include",
       "-IDrivers/SPI",
       "-IDrivers/GPIO",
+      "-IDrivers/USART",
       "-Og",
       "-Wall",
       "-fdata-sections",
@@ -130,13 +135,13 @@
       "build/stm32g031_gpio_driver.o",
       "Drivers/GPIO/stm32g031_gpio_driver.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM/G0/WeActG031",
-    "file": "/home/theuser/code/embedded/STM/G0/WeActG031/Drivers/GPIO/stm32g031_gpio_driver.c",
-    "output": "/home/theuser/code/embedded/STM/G0/WeActG031/build/stm32g031_gpio_driver.o"
+    "directory": "/media/documents/Code/embedded/STM/G0/WeActG031",
+    "file": "/media/documents/Code/embedded/STM/G0/WeActG031/Drivers/GPIO/stm32g031_gpio_driver.c",
+    "output": "/media/documents/Code/embedded/STM/G0/WeActG031/build/stm32g031_gpio_driver.o"
   },
   {
     "arguments": [
-      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "/home/theuser/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
       "-c",
       "-mcpu=cortex-m0plus",
       "-mthumb",
@@ -146,6 +151,7 @@
       "-I../CMSIS/Include",
       "-IDrivers/SPI",
       "-IDrivers/GPIO",
+      "-IDrivers/USART",
       "-Og",
       "-Wall",
       "-fdata-sections",
@@ -157,13 +163,41 @@
       "build/stm32g031_spi_driver.o",
       "Drivers/SPI/stm32g031_spi_driver.c"
     ],
-    "directory": "/home/theuser/code/embedded/STM/G0/WeActG031",
-    "file": "/home/theuser/code/embedded/STM/G0/WeActG031/Drivers/SPI/stm32g031_spi_driver.c",
-    "output": "/home/theuser/code/embedded/STM/G0/WeActG031/build/stm32g031_spi_driver.o"
+    "directory": "/media/documents/Code/embedded/STM/G0/WeActG031",
+    "file": "/media/documents/Code/embedded/STM/G0/WeActG031/Drivers/SPI/stm32g031_spi_driver.c",
+    "output": "/media/documents/Code/embedded/STM/G0/WeActG031/build/stm32g031_spi_driver.o"
   },
   {
     "arguments": [
-      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "/home/theuser/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "-c",
+      "-mcpu=cortex-m0plus",
+      "-mthumb",
+      "-DSTM32G031xx",
+      "-ICore/Inc",
+      "-I../CMSIS/Device/ST/STM32G0xx/Include",
+      "-I../CMSIS/Include",
+      "-IDrivers/SPI",
+      "-IDrivers/GPIO",
+      "-IDrivers/USART",
+      "-Og",
+      "-Wall",
+      "-fdata-sections",
+      "-ffunction-sections",
+      "-g",
+      "-gdwarf-2",
+      "-Wa,-a,-ad,-alms=build/stm32g0_usart.lst",
+      "-o",
+      "build/stm32g0_usart.o",
+      "Drivers/USART/stm32g0_usart.c"
+    ],
+    "directory": "/media/documents/Code/embedded/STM/G0/WeActG031",
+    "file": "/media/documents/Code/embedded/STM/G0/WeActG031/Drivers/USART/stm32g0_usart.c",
+    "output": "/media/documents/Code/embedded/STM/G0/WeActG031/build/stm32g0_usart.o"
+  },
+  {
+    "arguments": [
+      "/home/theuser/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
       "-x",
       "assembler-with-cpp",
       "-c",
@@ -175,6 +209,7 @@
       "-I../CMSIS/Include",
       "-IDrivers/SPI",
       "-IDrivers/GPIO",
+      "-IDrivers/USART",
       "-Og",
       "-Wall",
       "-fdata-sections",
@@ -185,8 +220,8 @@
       "build/startup_stm32g031xx.o",
       "startup_stm32g031xx.s"
     ],
-    "directory": "/home/theuser/code/embedded/STM/G0/WeActG031",
-    "file": "/home/theuser/code/embedded/STM/G0/WeActG031/startup_stm32g031xx.s",
-    "output": "/home/theuser/code/embedded/STM/G0/WeActG031/build/startup_stm32g031xx.o"
+    "directory": "/media/documents/Code/embedded/STM/G0/WeActG031",
+    "file": "/media/documents/Code/embedded/STM/G0/WeActG031/startup_stm32g031xx.s",
+    "output": "/media/documents/Code/embedded/STM/G0/WeActG031/build/startup_stm32g031xx.o"
   }
 ]

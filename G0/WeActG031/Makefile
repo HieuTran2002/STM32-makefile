@@ -17,10 +17,11 @@ BUILD_DIR = build
 # source
 ######################################
 # C sources
-C_SOURCES = Drivers/GPIO/Example/blink.c
+C_SOURCES = Drivers/USART/Example/helloworld.c
 C_SOURCES += $(wildcard Core/Src/*.c)
 C_SOURCES += $(wildcard Drivers/GPIO/*.c)
 C_SOURCES += $(wildcard Drivers/SPI/*.c)
+C_SOURCES += $(wildcard Drivers/USART/*.c)
 
 # ASM sources
 ASM_SOURCES = startup_stm32g031xx.s
@@ -80,6 +81,7 @@ C_INCLUDES =  \
 -I../CMSIS/Include \
 -IDrivers/SPI \
 -IDrivers/GPIO \
+-IDrivers/USART \
 
 
 # compile gcc flags
