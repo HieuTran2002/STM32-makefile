@@ -37,8 +37,10 @@ int main (){
     GPIO_Config();
     USART_Config();
 
+    USART_SendChar(USART_Handle.pUSART, 'a');
+
     for (;;) {
-        delay_ms(10);
+        delay_ms(20);
     }
     return 0;
 }

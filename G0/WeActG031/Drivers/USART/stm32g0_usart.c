@@ -1,6 +1,7 @@
 #include "stm32g0_usart.h"
 #include "stm32g031xx.h"
 
+
 void USART_PeripheralClockControl(USART_TypeDef* USART){
     USART == USART2 ? RCC->APBENR1 |= RCC_APBENR1_USART2EN : 0;
 }
@@ -62,14 +63,54 @@ uint8_t USART_ReceiveChar(USART_TypeDef* USART) {
     return (uint8_t)USART->RDR;
 }
 
-void USART2_IRQHandler(void){
+void _USART2_IRQHandler(void){
     if (USART2->ISR & USART_ISR_RXNE_RXFNE) {
         GPIOA->ODR ^= (1 << 4);
         (void)USART2->RDR;
     }
-        // Handle errors if needed
+
+    // Handle errors if needed
     if (USART2->ISR & (USART_ISR_PE | USART_ISR_FE | USART_ISR_NE | USART_ISR_ORE)) {
         // Clear error flags
         USART2->ICR = USART_ICR_PECF | USART_ICR_FECF | USART_ICR_CMCF | USART_ICR_ORECF;
+    }
+}
+
+#define MAX_BUFFER 128
+char usart_rx_buffer[MAX_BUFFER];
+volatile uint8_t buffer_index = 0;
+
+void USART2_IRQHandler(void) {
+
+    if (USART2->ISR & USART_ISR_RXNE_RXFNE) {
+        char received_char = USART2->RDR;  // Read the received character
+
+        if (received_char == '\n') {
+            usart_rx_buffer[buffer_index] = '\0';
+            handle_received_string(usart_rx_buffer);
+            buffer_index = 0;
+        }
+        else if (buffer_index < MAX_BUFFER) {
+            usart_rx_buffer[buffer_index++] = received_char;
+        }
+        else{
+            buffer_index = 0;
+        }
+        received_char == 'o' ? GPIOA->ODR |= (1 << 4) : 0;
+        received_char == 'f' ? GPIOA->ODR &= ~(1 << 4) : 0;
+    }
+
+    // Handle errors if needed
+    if (USART2->ISR & (USART_ISR_PE | USART_ISR_FE | USART_ISR_NE | USART_ISR_ORE)) {
+        // Clear error flags
+        USART2->ICR = USART_ICR_PECF | USART_ICR_FECF | USART_ICR_CMCF | USART_ICR_ORECF;
+    }
+}
+
+void handle_received_string(char* str) {
+    if (strcmp(str, "on") == 0) {
+        GPIOA->ODR |= (1 << 4);
+    } else if (strcmp(str, "off") == 0) {
+        GPIOA->ODR &= ~(1 << 4);
     }
 }

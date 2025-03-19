@@ -1,7 +1,7 @@
 [
   {
     "arguments": [
-      "/home/theuser/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
       "-c",
       "-mcpu=cortex-m0plus",
       "-mthumb",
@@ -18,18 +18,18 @@
       "-ffunction-sections",
       "-g",
       "-gdwarf-2",
-      "-Wa,-a,-ad,-alms=build/blink.lst",
+      "-Wa,-a,-ad,-alms=build/helloworld.lst",
       "-o",
-      "build/blink.o",
-      "Drivers/GPIO/Example/blink.c"
+      "build/helloworld.o",
+      "Drivers/USART/Example/helloworld.c"
     ],
     "directory": "/media/documents/Code/embedded/STM/G0/WeActG031",
-    "file": "/media/documents/Code/embedded/STM/G0/WeActG031/Drivers/GPIO/Example/blink.c",
-    "output": "/media/documents/Code/embedded/STM/G0/WeActG031/build/blink.o"
+    "file": "/media/documents/Code/embedded/STM/G0/WeActG031/Drivers/USART/Example/helloworld.c",
+    "output": "/media/documents/Code/embedded/STM/G0/WeActG031/build/helloworld.o"
   },
   {
     "arguments": [
-      "/home/theuser/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
       "-c",
       "-mcpu=cortex-m0plus",
       "-mthumb",
@@ -57,7 +57,7 @@
   },
   {
     "arguments": [
-      "/home/theuser/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
       "-c",
       "-mcpu=cortex-m0plus",
       "-mthumb",
@@ -85,7 +85,7 @@
   },
   {
     "arguments": [
-      "/home/theuser/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
       "-c",
       "-mcpu=cortex-m0plus",
       "-mthumb",
@@ -113,7 +113,7 @@
   },
   {
     "arguments": [
-      "/home/theuser/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
       "-c",
       "-mcpu=cortex-m0plus",
       "-mthumb",
@@ -141,7 +141,7 @@
   },
   {
     "arguments": [
-      "/home/theuser/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
       "-c",
       "-mcpu=cortex-m0plus",
       "-mthumb",
@@ -169,7 +169,7 @@
   },
   {
     "arguments": [
-      "/home/theuser/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
       "-c",
       "-mcpu=cortex-m0plus",
       "-mthumb",
@@ -197,7 +197,7 @@
   },
   {
     "arguments": [
-      "/home/theuser/arm-gnu-toolchain-13.3.rel1-x86_64-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
       "-x",
       "assembler-with-cpp",
       "-c",

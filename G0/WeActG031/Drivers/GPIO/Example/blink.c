@@ -16,6 +16,6 @@ int main(){
     Init_GPIO();
     for (;;) {
         GPIOA->ODR ^= (1 << 4);
-        delay_ms(500);
+        delay_ms(50);
     }
 }

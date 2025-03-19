@@ -2,6 +2,7 @@ TARGET = theproject
 
 # debug build?
 DEBUG = 1
+DEBUGGER=daplink
 
 # GDB config file path
 GDB_CONFIG=../../.gdbinit
@@ -17,6 +18,7 @@ BUILD_DIR = build
 # source
 ######################################
 # C sources
+# C_SOURCES = Drivers/GPIO/Example/blink.c
 C_SOURCES = Drivers/USART/Example/helloworld.c
 C_SOURCES += $(wildcard Core/Src/*.c)
 C_SOURCES += $(wildcard Drivers/GPIO/*.c)
@@ -154,8 +156,9 @@ clean:
 rebuild:
 	make clean all
 
+# st-flash --connect-under-reset --reset write $< 0x8000000
 flash: $(BUILD_DIR)/$(TARGET).bin
-	st-flash --connect-under-reset --reset write $< 0x8000000
+	pyocd flash -t stm32g030f6px $<@0x08000000
 
 burn: clean all flash
 
@@ -167,10 +170,11 @@ gdb:
 		-ex "tar ext :3333" \
 		-ex "source $(SVD_FILE)" \
 		-ex "svd stm32g031.svd" \
-		-ex "b main" \
+		-ex "b main"
 
 openocd:
 	openocd -f interface/stlink-v2.cfg -f target/stm32g0x.cfg
+
 
 
 .PHONY: all clean flash burn

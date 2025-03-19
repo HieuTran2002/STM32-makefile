@@ -26,3 +26,4 @@ void USART_SendChar(USART_TypeDef* USART, uint8_t ch);
 void USART_SendString(USART_TypeDef* USART, const char* str);
 uint8_t USART_ReceiveChar(USART_TypeDef* USART);
 bool USART_IsDataAvailable(void);
+void handle_received_string(char* str);
