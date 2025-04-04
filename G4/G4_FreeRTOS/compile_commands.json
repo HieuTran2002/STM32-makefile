@@ -1,0 +1,39 @@
+[
+  {
+    "arguments": [
+      "/home/theuser/gcc-arm-none-eabi/bin/arm-none-eabi-gcc",
+      "-c",
+      "-mcpu=cortex-m4",
+      "-mthumb",
+      "-mfpu=fpv4-sp-d16",
+      "-mfloat-abi=hard",
+      "-DSTM32_THREAD_SAFE_STRATEGY=2",
+      "-DSTM32G431xx",
+      "-I/home/theuser/gcc-arm-none-eabi/arm-none-eabi/include",
+      "-I../CMSIS/Device/ST/STM32G4xx/Include",
+      "-I../CMSIS/Core/Include",
+      "-IDrivers/GPIO/Inc",
+      "-IDrivers/SPI/Inc",
+      "-IDrivers/I2C/Inc",
+      "-IDrivers/USART",
+      "-IDrivers/bsp",
+      "-ICore/Inc",
+      "-IThirdParty/FreeRTOS/include/",
+      "-IThirdParty/FreeRTOS/portable/GCC/ARM_CM4F/",
+      "-Isystem",
+      "-Og",
+      "-Wall",
+      "-fdata-sections",
+      "-ffunction-sections",
+      "-g",
+      "-gdwarf-2",
+      "-Wa,-a,-ad,-alms=build/blinky.lst",
+      "-o",
+      "build/blinky.o",
+      "Drivers/GPIO/Example/blinky.c"
+    ],
+    "directory": "/media/documents/Code/embedded/STM/G4/G4_FreeRTOS",
+    "file": "/media/documents/Code/embedded/STM/G4/G4_FreeRTOS/Drivers/GPIO/Example/blinky.c",
+    "output": "/media/documents/Code/embedded/STM/G4/G4_FreeRTOS/build/blinky.o"
+  }
+]
